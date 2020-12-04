@@ -37,7 +37,8 @@ public interface InterBoardDAO {
 	List<QnaQuestionVO> selectQnaList(String currentShowPageNo) throws SQLException;
 
 	// 입력받은 게시물 번호와 해당 게시물의 회원번호를 비교하여 일치하는 행을 조회(select)하는 메서드
-	QnaQuestionVO selectQnaDetail(String selectNo, String userNo) throws SQLException;
+//	QnaQuestionVO selectQnaDetail(String selectNo, String userNo) throws SQLException;
+	QnaQuestionVO selectQnaDetail(String selectNo) throws SQLException;
 
 	// 입력받은 게시물 번호로 tbl_qnaboard의 해당 답변(tbl_qnaanswer)을 조회하는 메서드
 	QnaAnswerVO selectAnswer(String selectNo) throws SQLException;

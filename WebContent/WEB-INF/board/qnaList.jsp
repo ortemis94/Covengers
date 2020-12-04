@@ -95,7 +95,7 @@
          </c:if>
          <c:if test="${questionList.size() ne 0}">
             <c:forEach var="qna" items="${questionList}">
-               <div class="board well" style="border:solid 1px gray; margin-bottom:10px;">
+               <div class="board well" style="border:solid 1px #ccc; margin-bottom:10px;">
 
                   <c:forEach var="answer" items="${answerList}">
                      <c:if test="${answer eq qna.qnaNo}">

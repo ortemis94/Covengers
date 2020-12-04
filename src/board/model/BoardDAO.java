@@ -412,7 +412,7 @@ public class BoardDAO implements InterBoardDAO {
 
 
 	// 입력받은 게시물 번호와 해당 게시물의 회원번호를 비교하여 일치하는 행을 조회(select)하는 메서드
-	@Override
+/*	@Override
 	public QnaQuestionVO selectQnaDetail(String selectNo, String userNo) throws SQLException {
 
 		QnaQuestionVO qqvo = null;
@@ -439,6 +439,42 @@ public class BoardDAO implements InterBoardDAO {
 				qqvo.setqContent(rs.getString(4));
 				qqvo.setqCategory(rs.getString(5));
 				qqvo.setqDate(rs.getString(6));
+			}
+			
+			
+		} finally {
+			close();
+		}
+		
+		return qqvo;
+	}// end of public QnaQuestionVO selectQnaPwd(String selectNo, String pwd) throws SQLException {}-----------------------------
+*/
+	@Override
+	public QnaQuestionVO selectQnaDetail(String selectNo) throws SQLException {
+		
+		QnaQuestionVO qqvo = null;
+		try {
+			
+			conn = ds.getConnection();
+			
+			String sql = "SELECT qnano, fk_userno, qusername, qsubject, qcontent, qcategory, to_char(qDate, 'yyyymmdd hh24:mi')\n"+
+					"FROM tbl_qnaquestion_test2\n"+
+					"WHERE qnano = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(selectNo));
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				qqvo = new QnaQuestionVO();
+				qqvo.setQnaNo(rs.getString(1));
+				qqvo.setqUserno(rs.getString(2));
+				qqvo.setqUserName(rs.getString(3));
+				qqvo.setqSubject(rs.getString(4));
+				qqvo.setqContent(rs.getString(5));
+				qqvo.setqCategory(rs.getString(6));
+				qqvo.setqDate(rs.getString(7));
 			}
 			
 			

@@ -332,10 +332,13 @@ a {
 			 </ul>
 		</li>
 	    
-       <!--  <li><a href="#team">Brand</a></li>
+        <!--  <li><a href="#team">Brand</a></li>
         <li><a href="#contact">Contact Us</a></li> -->
-
-		<li><a href="<%=request.getContextPath()%>/mypage/myInfo.com"><img src="/Covengers/images/user5.png" style="width: 25px; height: 25px;" /></a></li>
+	
+		<li>
+			<c:if test="${sessionScope.loginuser.status ne 3}"><a href="<%=request.getContextPath()%>/mypage/myInfo.com"><img src="/Covengers/images/user5.png" style="width: 25px; height: 25px;" /></a></c:if>
+			<c:if test="${sessionScope.loginuser.status eq 3}"><a href="<%=request.getContextPath()%>/covengers.com"><img src="/Covengers/images/user5.png" style="width: 25px; height: 25px;" /></a></c:if>
+		</li>
         <li><a href="<%=request.getContextPath()%>/product/myCart.com"><img src="/Covengers/images/shopping-cart8.png" style="width: 25x; height: 25px; margin-top: 2px;" /></a></li>
 	
         </ul>

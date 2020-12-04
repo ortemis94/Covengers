@@ -41,11 +41,11 @@
           <ul class="navbar-nav ml-auto">
 
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow d-sm-none">
+<!--         <li class="nav-item dropdown no-arrow d-sm-none">
               <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-search fa-fw"></i>
               </a>
-              <!-- Dropdown - Messages -->
+              Dropdown - Messages
               <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
                 <form class="form-inline mr-auto w-100 navbar-search">
                   <div class="input-group">
@@ -58,16 +58,16 @@
                   </div>
                 </form>
               </div>
-            </li>
+            </li> -->
 
             <!-- Nav Item - Alerts -->
-            <li class="nav-item dropdown no-arrow mx-1">
+          <!--   <li class="nav-item dropdown no-arrow mx-1">
               <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
-                <!-- Counter - Alerts -->
+                Counter - Alerts
                 <span class="badge badge-danger badge-counter">3+</span>
               </a>
-              <!-- Dropdown - Alerts -->
+              Dropdown - Alerts
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                 <h6 class="dropdown-header">
                   Alerts Center
@@ -109,14 +109,14 @@
               </div>
             </li>
 
-            <!-- Nav Item - Messages -->
+            Nav Item - Messages
             <li class="nav-item dropdown no-arrow mx-1">
               <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-envelope fa-fw"></i>
-                <!-- Counter - Messages -->
+                Counter - Messages
                 <span class="badge badge-danger badge-counter">7</span>
               </a>
-              <!-- Dropdown - Messages -->
+              Dropdown - Messages
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
                 <h6 class="dropdown-header">
                   Message Center
@@ -163,36 +163,32 @@
                 </a>
                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
               </div>
+            </li> -->
+            
+			<li class="nav-item dropdown d-flex align-items-center">
+				<a class="dropdown-item" href="#" data-toggle="modal" data-target="#goMainModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  	메인 페이지로
+            	</a>
             </li>
-
-            <div class="topbar-divider d-none d-sm-block"></div>
-
+            <li class="nav-item dropdown d-flex align-items-center">
+            	<div class="topbar-divider d-none d-sm-block"></div>
+			</li>
+			
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Joo-Ho Hwang</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.loginuser.name}</span>
                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
               </a>
               <!-- Dropdown - User Information -->
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
-                </a>
+              <!-- <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#goMainModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
+                  	메인 페이지로
                 </a>
-              </div>
+              </div> -->
             </li>
 
           </ul>
@@ -221,10 +217,14 @@
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-size: 15pt">${fn:substring(managementInfo.weekOfYear, fn:indexOf(managementInfo.weekOfYear, "-") + 1, -1)}주차 총 판매액</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">
-                      <span> 
-                      <fmt:parseNumber var="totalSalesPriceByWeek" value="${managementInfo.totalSalesPriceByWeek}" integerOnly="true"/>
-                      <fmt:formatNumber value="${totalSalesPriceByWeek}" pattern="#,###" />원</span>
-                      </div>
+                      	<c:if test="${managementInfo.totalSalesPriceByWeek ne null}">
+                      	<span> 
+                      		<fmt:parseNumber var="totalSalesPriceByWeek" value="${managementInfo.totalSalesPriceByWeek}" integerOnly="true"/>
+                      		<fmt:formatNumber value="${totalSalesPriceByWeek}" pattern="#,###" />원
+                      	</span>
+                    	</c:if>
+                    	<c:if test="${managementInfo.totalSalesPriceByWeek eq null}"><span style="color:red; font-size: 13pt;">주간 판매건수가 없습니다.</span></c:if>
+                      	</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -243,9 +243,13 @@
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1" style="font-size: 15pt">${fn:substring(managementInfo.monthOfYear, fn:indexOf(managementInfo.monthOfYear, "-") + 1, -1)}월 총 판매액</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">
-                      <span> 
-                      <fmt:parseNumber var="totalSalesPriceByMonth" value="${managementInfo.totalSalesPriceByMonth}" integerOnly="true"/>
-                      <fmt:formatNumber value="${totalSalesPriceByMonth}" pattern="#,###" />원</span>
+                      	<c:if test="${managementInfo.totalSalesPriceByMonth ne null}">
+                      	<span> 
+                      		<fmt:parseNumber var="totalSalesPriceByMonth" value="${managementInfo.totalSalesPriceByMonth}" integerOnly="true"/>
+                      		<fmt:formatNumber value="${totalSalesPriceByMonth}" pattern="#,###" />원
+                      	</span>
+                      	</c:if>
+                      	<c:if test="${managementInfo.totalSalesPriceByMonth eq null}"><span style="color:red; font-size: 13pt;">월간 판매건수가 없습니다.</span></c:if>
                       </div>
                     </div>
                     <div class="col-auto">
@@ -265,7 +269,9 @@
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1" style="font-size: 15pt">등록회원수</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><fmt:formatNumber value="${managementInfo.totalMember }" pattern="#,###" />명 </div>
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                          	<fmt:formatNumber value="${managementInfo.totalMember }" pattern="#,###" />명
+                          </div>
                         </div>
                         <div class="col">
                           <%-- <div class="progress progress-sm mr-2">
@@ -289,7 +295,9 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-warning text-uppercase mb-1" style="font-size: 15pt">등록 상품수</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${managementInfo.totalProduct }" pattern="#,###" />개</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">
+                      	<fmt:formatNumber value="${managementInfo.totalProduct }" pattern="#,###" />개
+                      </div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-gift fa-2x text-gray-300"></i>
@@ -306,9 +314,14 @@
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-size: 15pt">이번달 주문왕</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">
-                      <span>${managementInfo.buyName }님</span>
-                      <br>
-                      <span>총 주문수  - <fmt:formatNumber value="${managementInfo.totalOrderQty}" pattern="#,###" />회</span>
+                      <c:if test="${managementInfo.buyUserno ne null}">
+                	      <span>${managementInfo.buyName }님</span>
+        	              <br>
+            	          <span>총 주문수  - <fmt:formatNumber value="${managementInfo.totalOrderQty}" pattern="#,###" />회</span>
+                      </c:if>
+                      <c:if test="${managementInfo.buyUserno eq null}">
+    	                  <span style="color:red; font-size: 13pt;">이번달 주문왕은 없습니다.</span>
+                      </c:if>
                       </div>
                     </div>
                     <div class="col-auto">
@@ -327,9 +340,14 @@
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1" style="font-size: 15pt">이번달 flex왕</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">
-                      <span>${managementInfo.flexName }님</span>
-                      <br>
-                      <span>총 결제액  - <fmt:formatNumber value="${managementInfo.totalFlex}" pattern="#,###" />원</span>
+                      <c:if test="${managementInfo.flexUserno ne null}">
+	                      <span>${managementInfo.flexName }님</span>
+	                      <br>
+	                      <span>총 결제액  - <fmt:formatNumber value="${managementInfo.totalFlex}" pattern="#,###" />원</span>
+	                  </c:if>
+                      <c:if test="${managementInfo.flexUserno eq null}">
+    	                  <span style="color:red; font-size: 13pt;">이번달 flex왕은 없습니다.</span>
+                      </c:if>
                       </div>
                     </div>
                     <div class="col-auto">
@@ -354,7 +372,7 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                 		 <h6 class="m-0 font-weight-bold text-primary">카테고리별 등록 상품 수</h6>
+                 		 <h6 class="m-0 font-weight-bold text-primary">이번주 상품 판매량</h6>
                    </div>
                   </div>
                 </div>
@@ -401,7 +419,7 @@
   </a>
 
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="goMainModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -410,10 +428,10 @@
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-body">메인페이지로 넘어가려면 mainPage 버튼을 누르세요.</div>
         <div class="modal-footer">
+          <a class="btn btn-primary" id="btnLogout" href="<%=request.getContextPath()%>/main.com">mainPage</a>
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="admin/login.html">Logout</a>
         </div>
       </div>
       
@@ -452,19 +470,69 @@
 		data.push(item.countPerCategory);
 	}) */
 	
+/* 
 	<c:forEach var='info' items='${infoList}' varStatus='status'>
-		label.push('${info.krcategoryname}');
-		data.push('${info.countPerCategory}');
+		label.push('${info.payday}');
+		data.push('${info.sumOrderQty}');
+		weekTotalCount += Number("${info.sumOrderQty}");
 	</c:forEach>
+ */	
+ 	var weekTotalCount = 0;
+	var flag;	
+ 	var payday = "";
+	
+	for (var i = 1; i < 8; i++) {
+		flag = false;
+		switch (i) { // 판매일을 요일로 바꿔준다.
+		case 1:
+			payday = "일";
+			break;
+		case 2:
+			payday = "월";
+			break;
+		case 3:
+			payday = "화";
+			break;
+		case 4:
+			payday = "수";
+			break;
+		case 5:
+			payday = "목";
+			break;
+		case 6:
+			payday = "금";
+			break;
+		case 7:
+			payday = "토";
+			break;
+		}
+		
+		label.push(payday);
+		<c:forEach var='info' items='${infoList}' varStatus='status'>
+			if ('${info.payday}' == i) {
+				data.push('${info.sumOrderQty}');
+				weekTotalCount += Number("${info.sumOrderQty}");
+				flag = true;
+			}
+		</c:forEach>
+		if (!flag) {
+			data.push(0);
+		}
+	}
+
+	label.push('이번주 총 판매량');
+	data.push(weekTotalCount);
 	
 	console.log(label);
 	console.log(data);
+	console.log(weekTotalCount);
+	
 	var myLineChart = new Chart(ctx, {
 	  type: 'line',
 	  data: {
 	    labels: label,
 	    datasets: [{
-	      label: "카테고리별 상품",
+	      label: "요일별 상품 판매량",
 	      lineTension: 0.3,
 	      backgroundColor: "rgba(78, 115, 223, 0.05)",
 	      borderColor: "rgba(78, 115, 223, 1)",

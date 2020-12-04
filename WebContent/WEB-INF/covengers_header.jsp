@@ -286,15 +286,17 @@ img#gif {
 	      		<li><a href="<%= ctxPath%>/product/showReview.com">REVIEW</a></li>
 	      	</ul>
 		</li>
-	    
         <li><a href="">Recommend</a></li>
+        <li>
+			<c:if test="${sessionScope.loginuser.status ne 3}"><a href="<%=request.getContextPath()%>/mypage/myInfo.com"><img src="/Covengers/images/user5.png" style="width: 25px; height: 25px;" /></a></c:if>
+			<c:if test="${sessionScope.loginuser.status eq 3}"><a href="<%=request.getContextPath()%>/covengers.com"><img src="/Covengers/images/user5.png" style="width: 25px; height: 25px;" /></a></c:if>
+		</li>
+        <li><a href="<%=request.getContextPath()%>/product/myCart.com"><img src="../images/shopping-cart8.png" style="width: 25x; height: 25px; margin-top: 2px;" /></a></li>
         </ul>
       <!-- 오윤 코드 시작 -->
       </nav><!-- .nav-menu -->
       
-	    &nbsp;&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath()%>/mypage/myInfo.com"><img src="../images/user5.png" style="width: 25px; height: 25px;" /></a>
-        &nbsp;&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath()%>/product/myCart.com"><img src="../images/shopping-cart8.png" style="width: 25x; height: 25px; margin-top: 2px;" /></a>
-
+	    
       <!-- 오윤 코드 끝 -->
     </div>
 
