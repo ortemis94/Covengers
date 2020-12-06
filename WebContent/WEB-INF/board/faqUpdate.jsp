@@ -11,7 +11,6 @@
       /* border: solid 1px yellow;  */
       width: 1200px;
       margin: 30px auto;
-      padding-bottom: 200px;
       text-align: center; 
     }
 	
@@ -49,7 +48,14 @@
 <script>
 
 	$(document).ready(function() {
-
+		
+		/* // 넘어온 fvo가 빈값이 아니라면 각 항목에 값을 넣어준다.
+		if ("${fvo}" != null) {
+			$("input[name=question]").val("${fvo.faqQuestion}");
+			$("textarea[name=answer]").val("${fvo.faqAnswer}");
+			$("input[name=faqNo]").val("${fvo.faqNo}");
+		}
+		 */
 		// 처음 들어왔을 때엔 경고창을 보여주지 않는다.
 		$("span#questionAlert").hide();
 		$("span#answerAlert").hide();
@@ -80,29 +86,31 @@
 				return false;
 			}
 			
-			// 신규작성 action으로 간다. 
+			// 수정 action으로 간다.
 			var frm = document.faqFrm;
-			frm.action = "<%= ctxpath%>/board/faqRegister.com";
+			frm.action = "<%= ctxpath%>/board/faqUpdate.com";
 			frm.method = "post";
 			frm.submit();
+				
 		});
 		
 	});// end of $(document).ready(function() {});-------------------------
 
 </script>
-
+	
 	<div id="container">
 		<div id="miniContainer">
 			<h1>FAQ 작성</h1>
 		    <hr style="border: solid 1px gray;">
 			<form name="faqFrm">
 		      	<div class="form-group">
+			      	<input name="faqNo" type="hidden" value="${fvo.faqNo}"/>
 			    	<label for="question">질문:</label>
-			      	<input type="text" class="form-control" id="question" name="question" />
+			      	<input type="text" class="form-control" id="question" name="question" value="${fvo.faqQuestion}" />
 			      	<span id="questionAlert" style="color:red;">질문을 작성해주세요!!</span><br>
 			      	
 			      	<label for="comment">답변:</label>
-			      	<textarea class="form-control" rows="5" id="answer" name="answer"></textarea>
+			      	<textarea class="form-control" rows="5" id="answer" name="answer">${fvo.faqAnswer}</textarea>
 			      	<span id="answerAlert" style="color:red;">답변을 작성해주세요!!</span><br>
 		      		
 		      		<button id="submit" class="mybtn">등록(저장)</button>
@@ -113,4 +121,4 @@
       	</div>
 	</div>
 
-<jsp:include page="../covengers_footer.jsp"></jsp:include>
+<jsp:include page="../covengers_footer.jsp"></jsp:include> 

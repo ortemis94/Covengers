@@ -10,10 +10,12 @@
 <jsp:include page="../covengers_header.jsp"></jsp:include>
 
 <style type="text/css">
+
    div#container {
       /* border: solid 1px yellow; */
       width: 1300px;
       margin: 30px auto;
+      padding-bottom: 200px;
    }
 
    div#miniContainer {
@@ -23,6 +25,7 @@
       text-align: center;
       display: inline-block;
 	  float: left;
+	  padding-bottom: 13%;
    }
    
    span.head {
@@ -588,7 +591,7 @@
    
 </script>
 
-
+<!-- <body> -->
 <div id="container">
 	<div id="menu">
 		<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;마이페이지</h3>
@@ -686,6 +689,6 @@
    </div> <!-- end of #miniContainer -->
 
 </div>
-<%-- 
+<!-- </body> -->
+
 <jsp:include page="../covengers_footer.jsp"></jsp:include>
- --%>

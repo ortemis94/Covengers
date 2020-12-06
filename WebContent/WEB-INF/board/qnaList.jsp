@@ -82,7 +82,6 @@
    });// end of $(document).ready(function() {});-----------------------------------
 
 </script>
-<body>
 
    <div id="container">
       <div id="miniContainer">
@@ -116,5 +115,4 @@
       </div>
    </div>
 
-</body>
-</html>
+<jsp:include page="../covengers_footer.jsp"></jsp:include> 

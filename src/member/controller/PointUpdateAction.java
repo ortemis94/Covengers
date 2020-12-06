@@ -16,7 +16,7 @@ public class PointUpdateAction extends AbstractController {
 		super.header(request);
 		String Rcode = request.getParameter("Rcode");
 		
-		System.out.println(">>> 확인용 Rcode : " +Rcode);
+	//	System.out.println(">>> 확인용 Rcode : " +Rcode);
 		
 		InterMemberDAO mdao = new MemberDAO();
 		int updaterow = mdao.pointUpdate(Rcode); // 업데이트 완료되면 1반환(업데이트된 행 개수)
@@ -24,12 +24,12 @@ public class PointUpdateAction extends AbstractController {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("updaterow", updaterow);
 		
-		System.out.println(updaterow);
+	//	System.out.println(updaterow);
 		
 		String json = jsonObj.toString();
 		
 		request.setAttribute("json", json); // {"updaterow":1} 
-		System.out.println("PointUpdateAction json : " + json);
+	//	System.out.println("PointUpdateAction json : " + json);
 		
 		//super.setRedirect(false);
 		super.setViewPage("/WEB-INF/jsonview.jsp");

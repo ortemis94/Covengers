@@ -12,21 +12,26 @@
                 font-family: Arial, "MS Trebuchet", sans-serif;
                 word-break: break-all;
             }
+            
             #container {
                 /* border: soild 1px blue; */
                 width: 60%;
                 margin: 0 auto;
             }
+            
             ul {
                 list-style-type: none;
             }
+            
             ul > li {
                 line-height: 40px;
             }
+            
             #marca {
                 margin-top: 60px;
                 text-align: center;
             }
+            
             input.myinput {
                 border: none;
                 border-bottom: solid 1px lightgray;
@@ -34,23 +39,28 @@
                 font-size: 15pt;
                 margin-bottom: 10px;
             }
+            
             form#registerFrm {
                 width: 600px;
                 margin: 0 auto;
                 padding: 20px 30px;
             }
+            
             .pequenoTitle {
                 font-weight: bold;
                 font-size: 13pt;
             }
+            
             .error {
                 font-size: 11pt;
                 color: red;
                 margin-bottom: 10px;
             }
+            
             button {
                 font-weight: bold;
             }
+            
             legend {
                 font-size: 16pt;
                 font-weight: bold;
@@ -58,12 +68,14 @@
                 width: 120px;
                 border: none;
             }
+            
             fieldset {
                 border: solid 1px lightgray;
                 border-radius: 20px;
                 padding-bottom: 20px;
                 padding-right: 10px;
             }
+            
             #like {
                 border: solid 1px lightgray;
                 border-radius: 10px;
@@ -78,11 +90,11 @@
             }
             
             select {
-			    width: 130px;  /* 너비설정 */
-			    height: 40px;
-			    border: none;
-			    font-size: 13pt;
-			    border-bottom: solid 1px lightgray;
+             width: 130px;  /* 너비설정 */
+             height: 40px;
+             border: none;
+             font-size: 13pt;
+             border-bottom: solid 1px lightgray;
                 outline: none;
 
             }
@@ -109,80 +121,80 @@
                     }
                 });
                 
-				var emailtext = "";
+            var emailtext = "";
                 var emailid = "";
-      			var email = "";
+               var email = "";
                 
                 
-      			$("input#emailid").keyup(function(){ // 이메일아이디 입력창에 입력할때
-      				
-    				emailid = $(this).val(); //변수에 값 넣어주기
-    				
-      				if(emailid == ""){ // 이메일아이디 태그에 값 없을때
-    					$("#emailCheck").text("이메일 주소를 입력해주세요.");
-						$("#emailCheck").show();
-    				}
-      				else{
-      					if($("select#select").val() != null){
-      						//$("input#emailtext").val("");
-      						emailtext = $("select#select").val();
-      						email = $(this).val()+"@"+emailtext;
-      						
-      						$("input#email").val(email);
-	    					emailDuplicateCheck();
-      					}
-      					if($("input#emailtext").val() != ""){
-      						emailtext = $("input#emailtext").val();
-      						
-      						email = emailid+"@"+emailtext;
-	    					$("input#email").val(email);
-	    					 emailDuplicateCheck();
-      					}
-      				}
-      			});
-      			
-				$("select#select").change(function(){ //셀렉트 체인지 됐을때
-      				
-      				if($(this).val() == "directly"){ // 직접입력을 선택했을 때
-      					$("input#emailtext").show(); // 입력란 보여주기
-      					$("#emailCheck").hide();
-      				}
-      				else{ // 다른걸 선택했을 때
-    					$("input#emailtext").hide(); // 입력란 숨기기
-    					$("input#emailtext").val("");
-    					emailtext = $("select#select").val(); //선택된 태그의 값을 emailtext변수에 넣기
-    					
-	      					if(emailid != ""){
-	          				email = emailid+"@"+emailtext;
+               $("input#emailid").keyup(function(){ // 이메일아이디 입력창에 입력할때
+                  
+                emailid = $(this).val(); //변수에 값 넣어주기
+                
+                  if(emailid == ""){ // 이메일아이디 태그에 값 없을때
+                   $("#emailCheck").text("이메일 주소를 입력해주세요.");
+                  $("#emailCheck").show();
+                }
+                  else{
+                     if($("select#select").val() != null){
+                        //$("input#emailtext").val("");
+                        emailtext = $("select#select").val();
+                        email = $(this).val()+"@"+emailtext;
+                        
+                        $("input#email").val(email);
+                      emailDuplicateCheck();
+                     }
+                     if($("input#emailtext").val() != ""){
+                        emailtext = $("input#emailtext").val();
+                        
+                        email = emailid+"@"+emailtext;
+                      $("input#email").val(email);
+                       emailDuplicateCheck();
+                     }
+                  }
+               });
+               
+            $("select#select").change(function(){ //셀렉트 체인지 됐을때
+                  
+                  if($(this).val() == "directly"){ // 직접입력을 선택했을 때
+                     $("input#emailtext").show(); // 입력란 보여주기
+                     $("#emailCheck").hide();
+                  }
+                  else{ // 다른걸 선택했을 때
+                   $("input#emailtext").hide(); // 입력란 숨기기
+                   $("input#emailtext").val("");
+                   emailtext = $("select#select").val(); //선택된 태그의 값을 emailtext변수에 넣기
+                   
+                        if(emailid != ""){
+                         email = emailid+"@"+emailtext;
 
-	    					$("input#email").val(email);
-	    					emailDuplicateCheck();
-	          			}
-    				}
-				
-    			});
+                      $("input#email").val(email);
+                      emailDuplicateCheck();
+                      }
+                }
+            
+             });
 
-					$("input#emailtext").keyup(function(){
-	      				
-	      				emailtext = $("input#emailtext").val();
-	      				
-	      				if(emailtext == ""){
-	      					$("#emailCheck").text("이메일 주소를 올바르게 입력해주세요.");
-							$("#emailCheck").show();
-	      				}
-	      				else{
-	      					$("#emailCheck").hide();
-	      					emailtext = $("input#emailtext").val();
-	      				}
-	      		
-	      				if(emailid != "" && emailtext != ""){
-	          				email = emailid+"@"+emailtext;
+               $("input#emailtext").keyup(function(){
+                     
+                     emailtext = $("input#emailtext").val();
+                     
+                     if(emailtext == ""){
+                        $("#emailCheck").text("이메일 주소를 올바르게 입력해주세요.");
+                     $("#emailCheck").show();
+                     }
+                     else{
+                        $("#emailCheck").hide();
+                        emailtext = $("input#emailtext").val();
+                     }
+               
+                     if(emailid != "" && emailtext != ""){
+                         email = emailid+"@"+emailtext;
 
-	    					$("input#email").val(email);
-	    					 emailDuplicateCheck();
-	          			}
-	      			});
-				
+                      $("input#email").val(email);
+                       emailDuplicateCheck();
+                      }
+                  });
+            
              
 
                 $("input#password").blur(function () {
@@ -207,7 +219,7 @@
                 });
 
                 $("input#passwordCheck").blur(function () {
-                	var pwd = $(this).parent().siblings().children("input#password").val();
+                   var pwd = $(this).parent().siblings().children("input#password").val();
                     var pwdcheck = $(this).val().trim();
 
                     if (pwdcheck == "") {
@@ -226,54 +238,54 @@
                 });
 
                 $("input#birthday").keyup(function(){
-                	$(this).val( $(this).val().replace(/[^\d]/g, "").replace(/(\d{4})(\d{2})(\d{2})/,"$1.$2.$3") );
-                	
-                	var birthday = $(this).val();
-                	if(birthday == ""){
-               		 $(this).next().text("생년월일을 올바르게 입력해주세요.(생년월일을 8자리로 입력해주세요! ) 예) 19960716 ");
+                   $(this).val( $(this).val().replace(/[^\d]/g, "").replace(/(\d{4})(\d{2})(\d{2})/,"$1.$2.$3") );
+                   
+                   var birthday = $(this).val();
+                   if(birthday == ""){
+                      $(this).next().text("생년월일을 올바르게 입력해주세요.(생년월일을 8자리로 입력해주세요! ) 예) 19960716 ");
                         $(this).next().show();
                         $(this).val("");
-               	}
-               	else{
-               		$(this).next().hide();
+                  }
+                  else{
+                     $(this).next().hide();
                        // 010-7681-0219
                        $(this).blur(function () {
-                    	birthday = $(this).val();
-                       	if(birthday.length != 10){
+                       birthday = $(this).val();
+                          if(birthday.length != 10){
 
-                       		 $(this).next().text("생년월일을 올바르게 입력해주세요.(생년월일을 8자리로 입력해주세요! ) 예) 19960716 ");
+                              $(this).next().text("생년월일을 올바르게 입력해주세요.(생년월일을 8자리로 입력해주세요! ) 예) 19960716 ");
                                 $(this).next().show();
                                 $(this).val("");
-                       	}
+                          }
                        });
-               	}
+                  }
                 });
 
              
 
                 
                 $("input#mobile").keyup(function() { 
-                	$(this).val( $(this).val().replace(/[^\d]/g, "").replace(/(\d{3})(\d{4})(\d{4})/,"$1-$2-$3"));
-                	
-                	var mobile = $(this).val();
-                	if(mobile == ""){
-                		 $(this).next().text("전화번호 11자리(또는 10자리)를 입력해주세요.");
+                   $(this).val( $(this).val().replace(/[^\d]/g, "").replace(/(\d{3})(\d{4})(\d{4})/,"$1-$2-$3"));
+                   
+                   var mobile = $(this).val();
+                   if(mobile == ""){
+                       $(this).next().text("전화번호 11자리(또는 10자리)를 입력해주세요.");
                          $(this).next().show();
                          $(this).val("");
-                	}
-                	else{
-                		$(this).next().hide();
+                   }
+                   else{
+                      $(this).next().hide();
                         // 010-7681-0219
                         $(this).blur(function () {
-                        	mobile = $(this).val();
-                        	if(mobile.length != 13){
+                           mobile = $(this).val();
+                           if(mobile.length != 13){
 
-                        		 $(this).next().text("전화번호 11자리(또는 10자리)를 입력해주세요.");
+                               $(this).next().text("전화번호 11자리(또는 10자리)를 입력해주세요.");
                                  $(this).next().show();
                                  $(this).val("");
-                        	}
+                           }
                         });
-                	}
+                   }
                 });
 
                 $("button#searchAddress").click(function () {
@@ -326,12 +338,12 @@
                 });
 
                 $("input:checkbox[name=taste]").change(function(){
-                	if($("input:checkbox[name=taste]:checked").length >= 2) {
-                		$(":checkbox[name=taste]:not(:checked)").attr("disabled", true);
-                	}
-                	else{
-                		$("input:checkbox[name=taste]").removeAttr("disabled");
-                	}
+                   if($("input:checkbox[name=taste]:checked").length >= 2) {
+                      $(":checkbox[name=taste]:not(:checked)").attr("disabled", true);
+                   }
+                   else{
+                      $("input:checkbox[name=taste]").removeAttr("disabled");
+                   }
                 });
                 
                 $("input#Rcode").blur(function () {
@@ -367,7 +379,7 @@
                                     // 입력한 userid가 DB 테이블에 존재하지 않는 경우 : 에러띄워주기
                                     $("div#RcodeCheck").text("해당 회원이 존재하지 않습니다. 확인후 다시 입력해주세요.").css({ color: "red" });
                                     $("div#RcodeCheck").show();
-                                    $("div#Rcode").val("");
+                                    $("input#Rcode").val("");
                                 }
                             },
                             error: function (request, status, error) {
@@ -416,15 +428,10 @@
                         url: "<%=ctxPath%>/member/pointUpdate.com", // url은 데이터를 보내줄 곳이다.
                         data: {
                             Rcode: $("input#Rcode").val(),
-                        }, //data는 /MyMVC/member/emailDuplicateCheck.up으로 전송해야할 데이터를 말한다.
+                        }, 
                         type: "post",
-                        //   dataType:"json",    //JSON : Javascript Standard Object Notation. / dataType은 /MyMVC/member/idDuplicateCheck.up에서 실행된 결과물을 받아오는 데이터 타입을 이야기한다.
-                        // dataType:"json"을 생략하면 웹페이지에 띄워지는  {"isExists":true}는 JSON(자바스크립트객체)으로 인식되지 않고 단순 문자열로 인식된다.
                         success: function (text) {
-                            // (변수명은 뭐라고써도 노상관쓰~~)
-
-                            var json = JSON.parse(text); // JSON.parse(text); 은 JSON 형식으로 되어진 문자열을 자바스크립트 객체로 변환해주는 것이다.
-                            // 조심할 것은 text 는 반드시 JSON 형식으로 되어진 문자열이어야 한다.
+                            var json = JSON.parse(text);
                         },
                         error: function (request, status, error) {
                             alert("code: " + request.status + "\n" + "message: " + request.responseText + "\n" + "error: " + error);
@@ -442,8 +449,8 @@
             
             function emailDuplicateCheck() {
                 var email = $("input#email").val();
-            	
-            	if (email == "") {
+               
+               if (email == "") {
                     $("div#emailCheck").text("이메일은 필수입력사항 입니다.").css({ color: "red" });
                     $("div#emailCheck").show();
                 } else {
@@ -453,10 +460,10 @@
                     var bool = regExp.test(email);
                     
                     if (!bool) {
-                    	$("div#emailCheck").text("이메일 형식이 맞지 않습니다.").css({ color: "red" });
-                    	$("div#emailCheck").show();
-                    	$("input#emailid").val("");
-                    	
+                       $("div#emailCheck").text("이메일 형식이 맞지 않습니다.").css({ color: "red" });
+                       $("div#emailCheck").show();
+                       $("input#emailid").val("");
+                       
                     } else {
                         // 이메일이 입력되었고, 형식맞을 때
                         // 이메일 중복체크
@@ -474,7 +481,7 @@
 
                                 var json = JSON.parse(text); // JSON.parse(text); 은 JSON 형식으로 되어진 문자열을 자바스크립트 객체로 변환해주는 것이다.
                                 // 조심할 것은 text 는 반드시 JSON 형식으로 되어진 문자열이어야 한다.
-								
+                        
                                 if (json.isExists) {
                                     // 입력한 userid가 이미 사용중일때(중복)
                                     $("div#emailCheck").text("해당 이메일은 이미 사용중인 이메일 입니다. 다른 이메일 주소를 입력해주세요.").css({ color: "red" });
@@ -514,14 +521,14 @@
                             <span>@</span>
                             <input type="text" id="emailtext" class="myinput" size="10px"/>
                             <select id="select">
-					            <option value="" disabled selected>E-Mail 선택</option>
-					            <option value="naver.com" id="naver.com">naver.com</option>
-					            <option value="gmail.com" id="gmail.com">gmail.com</option>
-					            <option value="hanmail.net" id="hanmail.net">hanmail.net</option>
-					            <option value="nate.com" id="nate.com">nate.com</option>
-					            <option value="directly" id="textEmail">직접 입력하기</option>
-					        </select>
-					        <input type="hidden" name="email" id="email"/>
+                           <option value="" disabled selected>E-Mail 선택</option>
+                           <option value="naver.com" id="naver.com">naver.com</option>
+                           <option value="gmail.com" id="gmail.com">gmail.com</option>
+                           <option value="hanmail.net" id="hanmail.net">hanmail.net</option>
+                           <option value="nate.com" id="nate.com">nate.com</option>
+                           <option value="directly" id="textEmail">직접 입력하기</option>
+                       </select>
+                       <input type="hidden" name="email" id="email" class="requiredInfo"/>
                             <div class="error" id="emailCheck"></div>
                         </li>
                         <li>
@@ -538,13 +545,13 @@
                         </li>
                          
                         <li>
-                        	<label class="pequenoTitle">성별</label><br>
+                           <label class="pequenoTitle">성별</label><br>
                             <select id="gender" name="gender" aria-label="성별">
-	                            <option value="" selected>성별</option>
-	                            <option value="1">남자</option>
-	                            <option value="2">여자</option>
-	                            <option value="3">선택 안함</option>
-                          	</select>
+                               <option value="" selected>성별</option>
+                               <option value="1">남자</option>
+                               <option value="2">여자</option>
+                               <option value="3">선택 안함</option>
+                             </select>
                         </li>
                         
                         <li>
@@ -559,7 +566,7 @@
                             <input type="text" name="extraAddress" id="extraAddress" class="myinput" size="41px" placeholder="참고항목" />
                             <div class="error"></div>
                         </li>
-                        <li>
+                    <!--     <li>
                             <label class="pequenoTitle">취향정보</label><span>(2개까지 선택가능)</span>
                             <div id="like">
                                 <label for="dulce">달콤한향</label><input type="checkbox" name="taste" id="dulce" value="달콤"  />&nbsp;&nbsp; 
@@ -568,8 +575,8 @@
                                 <label for="pesado">무거운향</label><input type="checkbox" name="taste" id="pesado" value="무거운" />&nbsp;&nbsp; 
                                 <label for="fresco">시원한향</label><input type="checkbox" name="taste" id="fresco" value="시원" />&nbsp;&nbsp;
                             </div>
-                            <!-- <div class="error">취향은 두개까지 선택가능합니다.</div> -->
-                        </li>
+                            <div class="error">취향은 두개까지 선택가능합니다.</div>
+                        </li> -->
                         <li>
                             <label class="pequenoTitle">추천인코드</label> <input type="text" name="rcode" id="Rcode" class="myinput" size="41px" />
                             <div class="error" id="RcodeCheck"></div>
@@ -584,5 +591,6 @@
                 </fieldset>
             </form>
         </div>
+        <jsp:include page="../covengers_footer.jsp"></jsp:include>
     </body>
 </html>

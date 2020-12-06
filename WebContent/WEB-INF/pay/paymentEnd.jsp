@@ -28,6 +28,5 @@
       </div>   
    </div>
 </div>
-</body>
 
-</html>
+<jsp:include page="../covengers_footer.jsp"></jsp:include> 

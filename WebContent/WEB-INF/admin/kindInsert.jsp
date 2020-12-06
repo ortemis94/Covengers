@@ -5,7 +5,7 @@
     String ctxPath = request.getContextPath();
     %>
     
-    
+ <jsp:include page="../covengers_header.jsp"></jsp:include>    
 <script type="text/javascript">
 	$(document).ready(function(){
 		//////////////////////////////////////////////////////////////////////////////////////////////////
@@ -177,3 +177,5 @@
 				</div>
 			</div>
 		</div>
+		
+<jsp:include page="../covengers_footer.jsp"></jsp:include> 

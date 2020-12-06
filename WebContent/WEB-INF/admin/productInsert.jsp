@@ -4,7 +4,7 @@
     <%
     String ctxPath = request.getContextPath();
     %>
-    
+<jsp:include page="../covengers_header.jsp"></jsp:include>    
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
 <script src="http://malsup.github.com/jquery.form.js"></script> 
 
@@ -474,3 +474,5 @@
 		</div>
 	</div>
 </div>
+
+<jsp:include page="../covengers_footer.jsp"></jsp:include> 

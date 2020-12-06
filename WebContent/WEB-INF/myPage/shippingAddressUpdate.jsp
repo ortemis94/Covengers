@@ -3,98 +3,147 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
     
-<!-- <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" /> -->
+<jsp:include page="../covengers_header.jsp"></jsp:include> 
 <title>배송지변경</title>
 
 
 <style type="text/css">
     
-    span.necesitado {
-	    color: red;
-	    font-weight: bold;
-	    font-size: 13pt;
-	}
+    body {
+       font-family: "Open Sans", sans-serif;
+    }
     
-    .mylabel{
+    span.necesitado {
+       color: red;
+       font-weight: bold;
+       font-size: 13pt;
+   }
+    
+    .mylabel {
         width: 100px;
     }
     
+    legend {
+         font-size: 16pt;
+         font-weight: bold;
+         text-align: center;
+         width: 120px;
+         border: none;
+     }
+     
+  /*    fieldset {
+         border: solid 1px lightgray;
+         border-radius: 10px;
+         padding-bottom: 20px;
+         padding-right: 10px;
+         width: 90%;
+     } */
+    
+    span#defaultAddress {
+       font-size: 10pt; 
+       color: #09d062; 
+       font-weight: bold;
+       border: solid 1px #09d062;
+       border-radius: 15px;
+       padding: 3px 5px;
+       margin-bottom: 5px;
+       width: 80px;
+    }
+
+   table#addressCard {
+      border-collapse: separate;
+        border-spacing: 0 10px;
+   }
+
+   input.myinput {
+      width: 70%;
+      height: 25px;
+      font-size: 11pt;
+      
+   }
+    
+    input#postcode {
+       width: 30%;
+    }
+    
+    select#select {
+       height: 25px;
+       width: 70%
+    }
 </style>
 
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 
-	$(document).ready(function(){
-		
+   $(document).ready(function(){
+      
         // == 요청사항 select란에 띄워주기 == //
-		
+      
         var isSelected = false;
         
         $("input#deliveryRequest").hide();
         
-		 $("#select option").each(function(){
-		    if($(this).val()=="${svo.deliveryRequest}"){
+       $("#select option").each(function(){
+          if($(this).val()=="${svo.deliveryRequest}"){
 
-		      $(this).attr("selected","selected");  
-		      isSelected = true;
-		    }
-		 });
-		 
-	    if(!isSelected){
-			$("input#deliveryRequest").val("${svo.deliveryRequest}");
-	    	$("input#deliveryRequest").show();
-			$("#select option:eq(5)").attr("selected","selected");
-		}
-			    
-	    $("select#select").change(function(){ //셀렉트 체인지 됐을때
-			
-			var deliveryRequest = "";
-		
-			if($(this).val() == "기타"){ // 직접입력을 선택했을 때
-				$("input#deliveryRequest").val("");
-				$("input#deliveryRequest").show(); // 입력란 보여주기
-			
-			}
-			else{ // 다른걸 선택했을 때
-				$("input#deliveryRequest").hide(); // 입력란 숨기기
-				$("input#deliveryRequest").val("");
-				deliveryRequest = $("select#select").val();
-				$("input#deliveryRequest").val(deliveryRequest);
-  			}
-		
-	});
-	    
-		$("button#btnDelete").click(function(){
-			shipno = $(this).siblings("input[name=shipNo]").val();
-			$.ajax({
-				url: "<%= request.getContextPath() %>/member/shippingAddressDelete.com",
-				data: {"shipNo" : shipno},
-				type: "post",
-				dataType: "json",
-				success:function(json){
-					if(json.isDeleted){
-						alert("배송지 삭제 성공");
-						opener.location.reload();
-						self.close();
-					}
-					else{
-						alert("배송지 삭제 실패");
-					}
-				},
-				error: function(request, status, error){
-	                alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
-	             }
-			});
-		});
-		
-		$("button#searchAddress").click(function () {
+            $(this).attr("selected","selected");  
+            isSelected = true;
+          }
+       });
+       
+       if(!isSelected){
+         $("input#deliveryRequest").val("${svo.deliveryRequest}");
+          $("input#deliveryRequest").show();
+         $("#select option:eq(5)").attr("selected","selected");
+      }
+             
+       $("select#select").change(function(){ //셀렉트 체인지 됐을때
+         
+         var deliveryRequest = "";
+      
+         if($(this).val() == "기타"){ // 직접입력을 선택했을 때
+            $("input#deliveryRequest").val("");
+            $("input#deliveryRequest").show(); // 입력란 보여주기
+         
+         }
+         else{ // 다른걸 선택했을 때
+            $("input#deliveryRequest").hide(); // 입력란 숨기기
+            $("input#deliveryRequest").val("");
+            deliveryRequest = $("select#select").val();
+            $("input#deliveryRequest").val(deliveryRequest);
+           }
+      
+   });
+       
+      $("button#btnDelete").click(function(){
+         //shipno = $(this).siblings("input[name=shipNo]").val();
+         shipno = "${svo.shipNo}";
+         //alert("${svo.shipNo}");
+         $.ajax({
+            url: "<%= request.getContextPath() %>/member/shippingAddressDelete.com",
+            data: {"shipNo" : shipno},
+            type: "post",
+            dataType: "json",
+            success:function(json){
+               if(json.isDeleted){
+                  alert("배송지 삭제 성공");
+                  opener.location.reload();
+                  self.close();
+               }
+               else{
+                  alert("배송지 삭제 실패");
+               }
+            },
+            error: function(request, status, error){
+                   alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+                }
+         });
+      });
+      
+      $("button#searchAddress").click(function () {
             new daum.Postcode({
                 oncomplete: function (data) {
                     // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -141,33 +190,33 @@
                     document.getElementById("detailAddress").focus();
                 },
             }).open();
-		}); // end of $("button#searchAddress").click(function () {}------------------
-		
+      }); // end of $("button#searchAddress").click(function () {}------------------
+      
             $("input#mobile").keyup(function() { 
-            	$(this).val( $(this).val().replace(/[^\d]/g, "").replace(/(\d{3})(\d{4})(\d{4})/,"$1-$2-$3"));
-            	
-            	var mobile = $(this).val();
-            	if(mobile.trim() == ""){
-            		$(this).val("");
-            	}
-            	else{
+               $(this).val( $(this).val().replace(/[^\d]/g, "").replace(/(\d{3})(\d{4})(\d{4})/,"$1-$2-$3"));
+               
+               var mobile = $(this).val();
+               if(mobile.trim() == ""){
+                  $(this).val("");
+               }
+               else{
                     // 010-7681-0219
                     $(this).blur(function () {
-                    	mobile = $(this).val();
-                    	if(mobile.length != 13){
+                       mobile = $(this).val();
+                       if(mobile.length != 13){
                              $(this).val("");
-                    	}
+                       }
                     });
-            	}
+               }
             });
          
-		
-	});// end of $(document).ready(function(){});-----------------------------
+      
+   });// end of $(document).ready(function(){});-----------------------------
 
-	
-	function goSaveUpdateAddress(){
-		
-		var bFlagRequiredInfo = false;
+   
+   function goSaveUpdateAddress(){
+      
+      var bFlagRequiredInfo = false;
 
         $(".requiredInfo").each(function () {
             var data = $(this).val(); //선택자(필수입력란)의 값
@@ -178,61 +227,96 @@
                 return false;
             }
         });
-	
+   
         if(!bFlagRequiredInfo){
-			var frm = document.shippingAddressFrm;
-	        frm.action = "ShippingAddressUpdateEnd.com";
-	        frm.method = "post";
-	        frm.submit();
+         var frm = document.shippingAddressFrm;
+           frm.action = "ShippingAddressUpdateEnd.com";
+           frm.method = "post";
+           frm.submit();
         }
-	}
+   }
 
 </script>
 
-
-<div align="center">
-	<form name="shippingAddressFrm">
-		<fieldset>
-			<div class="addressCard">
-				<c:if test="${svo.status eq '1'}">
-					<div style="font-size: 15pt; color: green; font-weight: bold;">기본배송지</div>
-				</c:if>
-				<input type="hidden" name="shipNo" value="${svo.shipNo}"/>
-				<input type="hidden" name="userno" value="${svo.userno}"/>
-				<label class="mylabel">수취인명</label><span class="necesitado">*</span>
-				<input name="receiverName" id="receiverName" class="myinput equiredInfo" value="${svo.receiverName}"/><br>
-				<label class="mylabel">배송지이름</label><span class="necesitado">*</span>
-				<input name="siteName"  id="siteName"  class="myinput equiredInfo" value="${svo.siteName}" /><br>
-				<label class="mylabel">우편번호</label><span class="necesitado">*</span>
-				<input name="postcode"  id="postcode" class="myinput equiredInfo" maxlength="5" value="${svo.postcode}"/><button type="button" id="searchAddress" class="btn btn-default">우편번호찾기</button><br/>
-				<label class="mylabel">주소</label><span class="necesitado">*</span>
-				<input name="address"  id="address"  class="myinput equiredInfo" value="${svo.address}" /><br>
-				<label class="mylabel">상세주소</label><span class="necesitado equiredInfo">*</span>
-				<input name="detailAddress"  id="detailAddress"  class="myinput" value="${svo.detailAddress}"/><br>
-				<label class="mylabel">참고항목</label>
-				<input name="extraAddress"  id="extraAddress"  class="myinput" value="${svo.extraAddress}"/><br>
-				<label class="mylabel">연락처</label><span class="necesitado equiredInfo">*</span>
-				<input name="mobile" class="myinput" id="mobile" maxlength="" value="${svo.mobile}" /><br>
-				<label class="mylabel">요청사항</label>
-				
-				<select id="select">
-				            <option id="0" value="" disabled selected>요청사항선택</option>
-				            <option id="1">문 앞</option>
-				            <option id="2">직접받고 부재시 문 앞</option>
-				            <option id="3">경비실</option>
-				            <option id="4">택배함</option>
-				            <option id="5">기타</option>
-					</select>
-				
-				<input name="deliveryRequest"  id="deliveryRequest" class="myinput"/><br>
-				<input type="checkbox" name="status" value="1"/><span>기본배송지로 저장</span><br>
-				<button id="btnUpdate" type="button" onclick="goSaveUpdateAddress()">저장</button>
-				<button id="btnDelete" type="button">삭제</button>
-			</div>
-		</fieldset>
-	</form>
+<div id="container1" align ="center">
+   
+    <form name="shippingAddressFrm">
+         <h3 style="margin-top: 20px;">배송지수정</h3>
+          <div style="border: solid 1px lightgray; width: 80%; padding: 20px; border-radius: 20px;">
+         <table id="addressCard">
+            <c:if test="${svo.status eq '1'}">
+               <tr>
+                  <td><span id="defaultAddress">기본배송지</span></td>
+               </tr>
+            </c:if>
+            <tr>
+                <td>배송지명<span class="necesitado">*</span></td>
+                <td>
+                   <input type="hidden" name="shipNo" value="${svo.shipNo}"/>
+                    <input type="hidden" name="userno" value="${sessionScope.loginuser.userno}"/>
+                    <input name="siteName"  id="siteName"  class="myinput equiredInfo" value="${svo.siteName}"/>
+                </td>
+            </tr>   
+            <tr>
+                <td>수취인명<span class="necesitado">*</span></td>
+                <td>
+                    <input name="receiverName" id="receiverName" class="myinput equiredInfo" value="${svo.receiverName}"/>
+                </td>
+            </tr>   
+            <tr>
+                <td>우편번호<span class="necesitado">*</span></td>
+                <td>
+                    <input name="postcode"  id="postcode" class="myinput equiredInfo" maxlength="5" value="${svo.postcode}"/>
+                    <button type="button" id="searchAddress" class="btn btn-default">우편번호찾기</button><br/>
+                </td>
+            </tr>   
+            <tr>
+               <td>주소<span class="necesitado">*</span></td>
+            <td><input name="address"  id="address"  class="myinput equiredInfo" value="${svo.address}" /></td>
+            </tr>
+            <tr>
+               <td>상세주소<span class="necesitado equiredInfo">*</span></td>
+               <td><input name="detailAddress"  id="detailAddress"  class="myinput" value="${svo.detailAddress}"/></td>
+            </tr>
+            <tr>
+               <td>참고항목</td>
+               <td><input name="extraAddress"  id="extraAddress"  class="myinput" value="${svo.extraAddress}"/></td>
+            </tr>
+            <tr>
+                <td>연락처<span class="necesitado equiredInfo">*</span></td>
+                <td>
+                   <input name="mobile" class="myinput" id="mobile" maxlength="" value="${svo.mobile}" />
+                </td>
+            </tr> 
+            <tr>
+                <td>요청사항</td>
+                <td>
+                    <select id="select">
+                        <option value="" disabled selected>요청사항선택</option>
+                        <option>문 앞</option>
+                        <option>직접받고 부재시 문 앞</option>
+                        <option>경비실</option>
+                        <option>택배함</option>
+                        <option>기타</option>
+               </select>
+                    <input name="deliveryRequest"  id="deliveryRequest" class="myinput" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                   <input type="checkbox" name="status" value="1"/><span style="width: 100%">기본배송지로 저장</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                   <button type="button" id="btnUpdate" class="btn btn-default" onclick="goSaveUpdateAddress()">저장</button>
+               <button type="button" id="btnDelete" class="btn btn-default">삭제</button>
+                </td>
+            </tr>
+         </table>
+      </div>
+    </form>
 </div>
-
-	
-</body>
-</html>
+   
+   
+<jsp:include page="../covengers_footer.jsp"></jsp:include> 

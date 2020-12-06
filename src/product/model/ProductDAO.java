@@ -731,99 +731,143 @@ public class ProductDAO implements InterProductDAO {
 	}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
-	@Override
-	public List<Map<String, String>> getOtherReview(String reviewno) throws SQLException {
-		
-		
-		
-		return null;
-	}
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 
-	@Override
-	public int deleteReview(String reviewno) throws SQLException {
-		int result = 0;
-		
-		try {
-			conn = ds.getConnection();
-			
-			String sql = "delete from tbl_review_test\n"+
-					"where reviewno = ?";
-			
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, reviewno);
-			
-			result = pstmt.executeUpdate();
-			
-			
-		} finally {
-			close();
-		}
-		
-		return result;
-	}
+	   @Override
+	   public int deleteReview(Map<String, String> paraMap) throws SQLException {
+	      int result = 0;
+	      
+	      try {
+	         conn = ds.getConnection();
+	         
+	         conn.setAutoCommit(false);
+	         
+	         String sql = "update tbl_payment_detail set reviewstatus = 0\n"+
+	               "where fk_paymentno = ? and substr(fk_optioncode, 0, 10) = ? ";
+	         
+	         pstmt = conn.prepareStatement(sql);
+	         
+	         pstmt.setString(1, paraMap.get("orderno"));
+	         pstmt.setString(2, paraMap.get("productcode"));
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
-	@Override
-	public int updateReview(Map<String, String> paraMap) throws SQLException {
-		int result = 0;
+	         pstmt.executeUpdate();
+	         
+	         sql = "delete from tbl_review_test\n"+
+	               "where reviewno = ?";
+	         
+	         pstmt = conn.prepareStatement(sql);
+	         
+	         pstmt.setString(1, paraMap.get("reviewno"));
+	         
+	         result = pstmt.executeUpdate();
+	         
+	         if (result == 1) {
+	            conn.commit();
+	         } else {
+	            conn.rollback();
+	         }
+	         
+	         
+	      } finally {
+	         close();
+	      }
+	      
+	      return result;
+	   }
 
-		try {
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+	   @Override
+	   public int updateReview(Map<String, String> paraMap) throws SQLException {
+	      int result = 0;
 
-			conn = ds.getConnection();
+	      try {
 
-			String sql = " update tbl_review_test set rcontents = ?, rdate = default, rgrade = ? "
-					+ " where reviewno = ? ";
+	         conn = ds.getConnection();
 
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, paraMap.get("rcontents"));
-			pstmt.setString(2, paraMap.get("rgrade"));
-			pstmt.setString(3, paraMap.get("reviewno"));
-			
+	         String sql = " update tbl_review_test set rcontents = ?, rdate = default, rgrade = ? "
+	               + " where reviewno = ? ";
 
-			result = pstmt.executeUpdate();
+	         pstmt = conn.prepareStatement(sql);
+	         
+	         pstmt.setString(1, paraMap.get("rcontent"));
+	         pstmt.setString(2, paraMap.get("rgrade"));
+	         pstmt.setString(3, paraMap.get("reviewno"));
+	         
 
-		} finally {
-			close();
+	         result = pstmt.executeUpdate();
 
-		}
+	      } finally {
+	         close();
 
-		return result;
-	}
+	      }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
-	@Override
-	public String getImgList(String category) throws SQLException {
-		
-		String imgList = "";
-		
-		try {
-			
-			conn = ds.getConnection();
-			
-			String sql = " select img from tbl_category_img where fk_categorycode = ? ";
-			
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, category);
-			
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				imgList = rs.getString(1);
-			}
-			
-		} finally {
-			close();
-		}
-		
-		
-		
-		return imgList;
-	}
-		
+	      return result;
+	   }
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+	   // 구매내역에서 이미 리뷰를 작성 했을 경우우우우우우 하나 리뷰 보기!!!!!!!!!
+	   
+	   @Override
+	   public String getReview(Map<String, String> paraMap) throws SQLException {
+	      String reviewno = "";
+	      
+	      try {
+	         conn = ds.getConnection();
+	         
+	         String sql = "select reviewno\n"+
+	               "from tbl_review_test\n"+
+	               "where fk_userno = ? and fk_productcode = ? and fk_orderno = ?";
+	         
+	         pstmt = conn.prepareStatement(sql);
+	         
+	         pstmt.setString(1, paraMap.get("userno"));
+	         pstmt.setString(2, paraMap.get("productcode"));
+	         pstmt.setString(3, paraMap.get("paymentno"));
+	         
+	         rs = pstmt.executeQuery();
+	         
+	         if (rs.next()) {
+	            reviewno = rs.getString(1);
+	         }
+	      } finally {
+	         close();
+	         
+	      }
+	      
+	      return reviewno;
+	   }
+	   
+	 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+   
+	// 카테고리별로 달라지는 백그라운드 이미지를 가져오기 위해!
+	   @Override
+	   public String getImgList(String category) throws SQLException {
+	      
+	      String imgList = "";
+	      
+	      try {
+	         
+	         conn = ds.getConnection();
+	         
+	         String sql = " select img from tbl_category_img where fk_categorycode = ? ";
+	         
+	         pstmt = conn.prepareStatement(sql);
+	         
+	         pstmt.setString(1, category);
+	         
+	         rs = pstmt.executeQuery();
+	         
+	         if(rs.next()) {
+	            imgList = rs.getString(1);
+	         }
+	         
+	      } finally {
+	         close();
+	      }
+	      
+	      
+	      
+	      return imgList;
+	   }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	
 

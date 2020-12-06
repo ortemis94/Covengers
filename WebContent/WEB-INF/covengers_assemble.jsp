@@ -572,18 +572,15 @@ a {
     
 
     <!-- ======= Team Section ======= -->
-    <section id="team" class="team" style="background:rgba(0, 0, 0, 0.5); margin-top: 100px;">
+     <section id="team" class="team" style=" margin-top: 100px; background-image: url( 'images/teambg5.png' ) ">
       <div class="container" style="text-align: center;">
 
         <div class="section-title" data-aos="fade-in" data-aos-delay="100">
-          <h2>Team</h2>
+          <h2 style="color:white;">los miembros de Covengers</h2>
+          <h1 style="color:white; font-weight: 700;">"los jóvenes persiguiendo por sus sueños"</h1>
+          <h2 style="color:white;">권오윤 김민성 박지현 안세형 황주호</h2>
         </div>
-		<p class="myp" style="font-weight: bold;">"los jóvenes persiguiendo por sus sueños"</p>
-        <p class="myp" style="font-size: 20pt;">권오윤 김민성 박지현 안세형 황주호</p>
-
-       
-
-      </div>
+       </div>
     </section><!-- End Team Section -->
 
 

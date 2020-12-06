@@ -286,7 +286,6 @@ img#gif {
 	      		<li><a href="<%= ctxPath%>/product/showReview.com">REVIEW</a></li>
 	      	</ul>
 		</li>
-        <li><a href="">Recommend</a></li>
         <li>
 			<c:if test="${sessionScope.loginuser.status ne 3}"><a href="<%=request.getContextPath()%>/mypage/myInfo.com"><img src="/Covengers/images/user5.png" style="width: 25px; height: 25px;" /></a></c:if>
 			<c:if test="${sessionScope.loginuser.status eq 3}"><a href="<%=request.getContextPath()%>/covengers.com"><img src="/Covengers/images/user5.png" style="width: 25px; height: 25px;" /></a></c:if>
@@ -317,7 +316,7 @@ img#gif {
   <script src="assets/js/main.js"></script>
     
   </header><!-- End Header -->
-  
+
   <div class="modal fade login" id="loginModal">
 		<div class="modal-dialog login animated">
 			<div class="modal-content">
@@ -484,5 +483,4 @@ img#gif {
 	</div>	
   
   <div style="display: block; margin-top: 13%;" ></div>
-  
   

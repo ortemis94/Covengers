@@ -168,7 +168,6 @@ public class MemberDAO implements InterMemberDAO {
 	public int pointUpdate(String rcode) throws SQLException {
 		
 		int result = 0;
-		String norcode = "admin";
 		
 		try {
 			
@@ -182,11 +181,13 @@ public class MemberDAO implements InterMemberDAO {
 			if(rcode != null) {
 			
 				pstmt.setInt(1, 10000);
-				pstmt.setString(2, rcode);
+				pstmt.setString(2, aes.encrypt(rcode));
 				
 				result = pstmt.executeUpdate();
-			}			
-
+			}	
+			
+		} catch (GeneralSecurityException | UnsupportedEncodingException e) {
+			e.printStackTrace();
 		} finally {
 			close();
 		}
@@ -839,7 +840,7 @@ public class MemberDAO implements InterMemberDAO {
 				result++;
 			}
 			
-			System.out.println(result);
+		//	System.out.println(result);
 			
 		}  finally {
 			close();

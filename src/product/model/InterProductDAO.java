@@ -54,17 +54,19 @@ public interface InterProductDAO {
 	//////////////////////////////////////////////////////////////
 	// 새로만든 메소드
 	
-	// 해당 상품에 다른 리뷰들 가져오기
-	List<Map<String, String>> getOtherReview(String reviewno) throws SQLException;
-
 	// 리뷰삭제 json	
-	int deleteReview(String reviewno) throws SQLException;
-
+	int deleteReview(Map<String, String> paraMap) throws SQLException;
+	
 	//리뷰 업데이트하자
 	int updateReview(Map<String, String> paraMap) throws SQLException;
 
+	// 구매내역에서 이미 리뷰를 작성 했을 경우우우우우우 하나 리뷰 보기!!!!!!!!!
+	String getReview(Map<String, String> paraMap) throws SQLException;
+
 	// 카테고리 별로 백그라운드 이미지 가져오기
 	String getImgList(String category) throws SQLException;
+	
+	
 	
 
 	///////////////////////////////////////////////////////////

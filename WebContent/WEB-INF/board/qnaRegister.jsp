@@ -129,7 +129,6 @@
 	}// end of function func_selectCategory() {}------------------------------------------------------------------	
 	
 </script>
-<body>
 
 	<div id="container" style="width: 1200px; margin: 0 auto;">
 		<div id="miniContainer">
@@ -219,5 +218,4 @@
 		</div>
 	</div>
 
-</body>
-</html>
+<jsp:include page="../covengers_footer.jsp"></jsp:include> 

@@ -15,13 +15,11 @@ public class QnaDetailAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+		super.header(request);
+		
 		HttpSession session = request.getSession();
 		MemberVO loginuser = (MemberVO)session.getAttribute("loginuser");
 
-		
-	//	String loginuser = "1234";
-	//	String status = "2";
-		
 		if (loginuser == null) { // 로그인 하지 않은 회원이라면
 			
 			String message = "로그인하셔야 합니다.";

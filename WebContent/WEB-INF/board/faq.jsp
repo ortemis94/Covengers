@@ -12,6 +12,7 @@
       /* border: solid 1px yellow;  */
       width: 1200px;
       margin: 30px auto;
+      padding-bottom: 200px;
       text-align: center; 
     }
    
@@ -65,6 +66,7 @@
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
+  line-height: 25px;
 }
  
 p {
@@ -98,6 +100,8 @@ p {
          
          var frm = document.requestFrm;
          frm.action = "<%= ctxPath%>/board/faqUpdate.com";
+         frm.method = "get";
+         <%-- frm.action = "<%= ctxPath%>/board/faqUpdate.com?requestFaqNo="+faqNo; --%>
          frm.submit();
       });
       
@@ -145,8 +149,6 @@ p {
 
 </script>
 
-<body>
-
     <div id="container">
       <div id="miniContainer">
           
@@ -154,7 +156,6 @@ p {
          <hr style="border: solid 1px gray;">
    
          <!-- 로그인 유저가 일반 회원이라면  -->
-         <%-- <c:if test="${loginStatus ne 3}"> --%>
          <c:if test="${sessionScope.loginuser eq null || sessionScope.loginuser.status ne 3}">
             <c:forEach var="faq" items="${faqList}" varStatus="status">
                <div class="item">
@@ -167,10 +168,9 @@ p {
          </c:if>
          
          <!-- 로그인 유저가 관리자라면 -->
-         <%-- <c:if test="${loginStatus eq 3}"> --%>
          <c:if test="${sessionScope.loginuser.status eq 3}">
             <form name="requestFrm">
-               <input type="hidden" name="requestFaqNo" value="" />
+                <input type="hidden" name="requestFaqNo" value="" />
             </form>
             <c:forEach var="faq" items="${faqList}" varStatus="status">
                <div class="item">
@@ -190,5 +190,5 @@ p {
       </div>
    </div>
 
-</body>
-</html>
+
+<jsp:include page="../covengers_footer.jsp"></jsp:include> 

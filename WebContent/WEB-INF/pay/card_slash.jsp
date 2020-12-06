@@ -9,7 +9,7 @@
 <%
   String ctxPath = request.getContextPath();
 %>
-
+<jsp:include page="../covengers_header.jsp"></jsp:include> 
 <style type="text/css">
    
 </style>
@@ -335,8 +335,5 @@
 </form>
 
 
-</body>
-
-</html>
-
+<jsp:include page="../covengers_footer.jsp"></jsp:include> 
 

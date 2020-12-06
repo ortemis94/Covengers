@@ -14,6 +14,7 @@
     	/* border: solid 1px yellow; */
       	width: 1300px;
       	margin: 30px auto;
+      	padding-bottom: 200px;
       	text-align: center;
     }
 
@@ -30,6 +31,7 @@
 /*      border: solid 1px red;  */
     	width: 700px;
       	margin: 0 auto;
+      	padding-bottom: 13%;
       	text-align: center;
       	display: inline-block;
 	 	float: left; 
@@ -343,7 +345,6 @@
 	
 </script>
 
-
 <div id="container">
 	<div id="menu">
 		
@@ -452,3 +453,6 @@
         
    	</div>
 </div>
+
+
+<jsp:include page="../covengers_footer.jsp"></jsp:include>    

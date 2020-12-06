@@ -239,13 +239,13 @@ button.btn-action {
 
 
 <c:if test="${not empty productList }">
-   <div style="height: 96%; width:20%; position: absolute; top: 65%; left: 90%; transform: translate(-50%, -50%);" align="center">
+   <div style="height: 90%; width:20%; position: absolute; top: 65%; left: 90%; transform: translate(-50%, -50%);" align="center">
       <div>
          <h3>관련상품</h3>
       </div>
       <div style="width: 90%; height: 90%; margin-top: 20px; overflow: hidden;">
          
-         <div class="swiper-container" style="">
+         <div class="swiper-container" style="overflow: hidden;">
             <div class="swiper-wrapper" >
                <c:forEach var="product" items="${productList}">
                   <div class="swiper-slide">
@@ -290,6 +290,7 @@ button.btn-action {
    </div>
 
 </c:if>
+
 
 <div id="bg-product-dp">
    <div id="product-name">
@@ -680,3 +681,4 @@ button.btn-action {
          
    </div>
 
+<jsp:include page="../covengers_footer.jsp"></jsp:include> 

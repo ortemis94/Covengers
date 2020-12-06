@@ -5,7 +5,7 @@
 <%@page isELIgnored="false" %>
 
 <%
-	String ctxPath = request.getContextPath();
+   String ctxPath = request.getContextPath();
 %>
 
 
@@ -35,30 +35,32 @@
 </head>
 
 <style>
-
+   td, th {
+        white-space: nowrap;
+   }
 </style>
-	
+   
 <script>
-	
-	$(document).ready(function() {
-		
-		$("tr.memberInfo").click(function() {
-						
-			var userno = $(this).children("td.userno").text();
-			
-			var frm = document.cartGoFrm;
-			frm.userno.value = userno;
-			
-			frm.action = "<%= ctxPath%>/product/showUserCart.com";
-			frm.method = "POST";
-			frm.submit();
-			
-		});
-		
-		
-	});
-	
-	
+   
+   $(document).ready(function() {
+      
+      $("tr.memberInfo").click(function() {
+                  
+         var userno = $(this).children("td.userno").text();
+         
+         var frm = document.cartGoFrm;
+         frm.userno.value = userno;
+         
+         frm.action = "<%= ctxPath%>/product/showUserCart.com";
+         frm.method = "POST";
+         frm.submit();
+         
+      });
+      
+      
+   });
+   
+   
 </script>
 
 <body id="page-top">
@@ -84,7 +86,7 @@
 
       <!-- Heading -->
       <div class="sidebar-heading">
-        	관리자 메뉴
+           관리자 메뉴
       </div>
 
 
@@ -166,63 +168,63 @@
                     </tr>
                   </thead>
                   <tbody>
-	                  	<c:forEach var="mvo" items="${mList}">
-		                    <tr class="memberInfo">
-		                      <td class="userno">${mvo.userno}</td>
-		                      <td>${mvo.name}</td>
-		                      <td>${mvo.email}</td>
-		                      <td>${mvo.mobile}</td>
-		                      <td>${mvo.postcode}&nbsp;${mvo.address}&nbsp;${mvo.detailAddress}&nbsp;${mvo.extraAddress}</td>
-								<td>
-									<c:choose>
-									
-										<c:when test="${mvo.gender eq '1'}">
-											남
-										</c:when>
-										
-										<c:otherwise>
-											여
-										</c:otherwise>
-										
-									</c:choose>
-								</td>
-		                      <td>${mvo.birthday}</td>
-		                      <td>
-			                      <c:forEach var="taste" items="${mvo.taste}">
-			                      		${taste}&nbsp;
-			                      </c:forEach>
-		                      </td>
-		                      <td>${mvo.point}</td>
-		                      <td>${mvo.registerday}</td>
-		                      <td>${mvo.lastpwdchangedate}</td>
-		                      <td>
-								<c:choose>
-								
-									<c:when test="${mvo.status eq 1}">
-										사용가능
-									</c:when>
-									
-									<c:otherwise>
-										회원탈퇴
-									</c:otherwise>
-									
-								</c:choose>
-		                      </td>
-		                      <td>
-								<c:choose>
-								
-									<c:when test="${mvo.idle eq 1}">
-										휴면계정
-									</c:when>
-									
-									<c:otherwise>
-										활동중
-									</c:otherwise>
-									
-								</c:choose>
-		                      </td>
-		                    </tr>
-	                   </c:forEach>
+                        <c:forEach var="mvo" items="${mList}">
+                          <tr class="memberInfo">
+                            <td class="userno">${mvo.userno}</td>
+                            <td>${mvo.name}</td>
+                            <td>${mvo.email}</td>
+                            <td>${mvo.mobile}</td>
+                            <td>${mvo.postcode}&nbsp;${mvo.address}&nbsp;${mvo.detailAddress}&nbsp;${mvo.extraAddress}</td>
+                        <td>
+                           <c:choose>
+                           
+                              <c:when test="${mvo.gender eq '1'}">
+                                 남
+                              </c:when>
+                              
+                              <c:otherwise>
+                                 여
+                              </c:otherwise>
+                              
+                           </c:choose>
+                        </td>
+                            <td>${mvo.birthday}</td>
+                            <td>
+                               <c:forEach var="taste" items="${mvo.taste}">
+                                     ${taste}&nbsp;
+                               </c:forEach>
+                            </td>
+                            <td>${mvo.point}</td>
+                            <td>${mvo.registerday}</td>
+                            <td>${mvo.lastpwdchangedate}</td>
+                            <td>
+                        <c:choose>
+                        
+                           <c:when test="${mvo.status eq 1}">
+                              사용가능
+                           </c:when>
+                           
+                           <c:otherwise>
+                              회원탈퇴
+                           </c:otherwise>
+                           
+                        </c:choose>
+                            </td>
+                            <td>
+                        <c:choose>
+                        
+                           <c:when test="${mvo.idle eq 1}">
+                              휴면계정
+                           </c:when>
+                           
+                           <c:otherwise>
+                              활동중
+                           </c:otherwise>
+                           
+                        </c:choose>
+                            </td>
+                          </tr>
+                      </c:forEach>
                   </tbody>
                 </table>
               </div>
@@ -263,7 +265,7 @@
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">Ã</span>
+            <span aria-hidden="true">Ã </span>
           </button>
         </div>
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
@@ -277,7 +279,7 @@
 
   <%-- ======================================= --%>
   <form name="cartGoFrm">
-  	<input type="hidden" name="userno" /> 
+     <input type="hidden" name="userno" /> 
   </form>
   <%-- ======================================= --%>
   

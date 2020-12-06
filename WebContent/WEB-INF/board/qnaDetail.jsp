@@ -176,8 +176,6 @@
 	
 </script>
 
-<body>
-
 	<div id="container">
 	
 		<div id="miniContainer">
@@ -319,5 +317,6 @@
 			<button id="goListBtn" type="button" class="mybtn">목록으로</button>
 		</div>
 	</div>
-</body>
-</html>
+
+<jsp:include page="../covengers_footer.jsp"></jsp:include> 	
+	

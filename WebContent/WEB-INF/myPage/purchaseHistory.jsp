@@ -1,184 +1,408 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+   pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <%
-	String ctxPath = request.getContextPath();
+   String ctxPath = request.getContextPath();
 %>
-    
-<jsp:include page="../covengers_header.jsp"></jsp:include>    
-    
+
+<jsp:include page="../covengers_header.jsp"></jsp:include>
+
 <style type="text/css">
+div#container {
+   /* border: solid 1px yellow; */
+   width: 1300px;
+   margin: 30px auto;
+   text-align: center;
+}
 
-	div#container {
-    	/* border: solid 1px yellow; */
-      	width: 1300px;
-      	margin: 30px auto;
-      	text-align: center;
-    }
+div#menu {
+   /*        border: solid 1px yellow; */
+   width: 250px;
+   margin: 100px auto;
+   padding: 20px 20px;
+   text-align: left;
+   float: left;
+}
 
-	div#menu {
-/*     	border: solid 1px yellow; */
-		width: 250px;
-		margin: 100px auto;
-		padding: 20px 20px;
-		text-align: left;
-		float: left;
-	}
-   	
-   	div#miniContainer {
-/*      border: solid 1px red;  */
-    	width: 700px;
-      	margin: 0 auto;
-      	text-align: center;
-      	display: inline-block;
-	 	float: left; 
-   	}
-	
-		
-	ul {
-		padding: 0;
-		line-height: 30px;
-		font-size: 12pt;
-	}
-	
-	ul#menu > li{
-		list-style: none;
-		cursor: pointer;
-		margin: 15px 0;
-	}
-	
-	div#menu > ul {
-		padding: 0;
-		/* line-height: 30px; */
-		font-size: 12pt;
-	}
+div#miniContainer {
+   /*      border: solid 1px red;  */
+   width: 700px;
+   margin: 0 auto;
+   text-align: center;
+   display: inline-block;
+   padding-bottom: 13%;
+   float: left;
+}
 
+ul {
+   padding: 0;
+   line-height: 30px;
+   font-size: 12pt;
+}
+
+ul#menu>li {
+   list-style: none;
+   cursor: pointer;
+   margin: 15px 0;
+}
+
+div#menu>ul {
+   padding: 0;
+   /* line-height: 30px; */
+   font-size: 12pt;
+}
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+   src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
+   
 
-	$(document).ready(function() {
-		
-		// 마이페이지 메뉴부분 이미지 관련 코드.
-	    $("div#menu").find("span").each(function() {
-			$(this).html("<img src='<%=ctxPath %>/images/perfumeicon3.png' width='25px;' height='25px;' />");
-		});
-		
-		$("div#menu").find("li").hover(function(event) {
-			$(this).siblings("span").html("<img src='<%=ctxPath %>/images/perfumeicon3.png' width='25px;' height='25px;' />");
-			$(this).find("span").html("<img src='<%=ctxPath %>/images/perfumeicon4.png' width='25px;' height='25px;' />");
-		}, function(event) {
-			$(this).find("span").html("<img src='<%=ctxPath %>/images/perfumeicon3.png' width='25px;' height='25px;' />"); 
-		}); 
-	  
-	   ///////////////////////////////////////////////////
 
-		
-	});// end of $(document).ready(function() {});-----------------------------
+   $(document).ready(function() {
+      
+      // 마이페이지 메뉴부분 이미지 관련 코드.
+       $("div#menu").find("span").each(function() {
+         $(this).html("<img src='<%=ctxPath %>/images/perfumeicon3.png' width='25px;' height='25px;' />");
+      });
+      
+      $("div#menu").find("li").hover(function(event) {
+         $(this).siblings("span").html("<img src='<%=ctxPath %>/images/perfumeicon3.png' width='25px;' height='25px;' />");
+         $(this).find("span").html("<img src='<%=ctxPath %>/images/perfumeicon4.png' width='25px;' height='25px;' />");
+      }, function(event) {
+         $(this).find("span").html("<img src='<%=ctxPath %>/images/perfumeicon3.png' width='25px;' height='25px;' />");
+      });
 
+   ///////////////////////////////////////////////////
+
+      $("button.goReview").click(function(){
+         var productcode = $(this).parent().find(".productcode").val();
+         var paymentno = $(this).parent().find(".paymentno").val();
+         
+         
+         var frm = document.reviewForm;
+         frm.productcode1.value = productcode;
+         frm.paymentno1.value = paymentno;
+         
+         
+         frm.action = "<%= ctxPath%>/product/showReviewForm.com";
+         frm.method = "POST";
+         frm.submit();
+         
+      });
+   
+   
+      $("span.getReview").click(function(){
+         
+         var productcode = $(this).parent().find(".productcode").val();
+         var paymentno = $(this).parent().find(".paymentno").val();
+         
+         var frm = document.reviewForm;
+         frm.productcode1.value = productcode;
+         frm.paymentno1.value = paymentno;
+         
+         
+         frm.action = "<%= ctxPath%>/product/getReview.com";
+         frm.method = "POST";
+         frm.submit();
+         
+      });
+   
+   });// end of $(document).ready(function() {});-----------------------------
 </script>
 
 
 <div id="container">
-	<div id="menu">
-		
-		<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;마이페이지</h3>
-		<ul id="menu">
-			<li onclick="location.href='<%= ctxPath%>/mypage/myInfo.com'"><span></span>&nbsp;내 정보 확인/수정</li>
-			<li onclick="location.href='<%= ctxPath%>/member/shippingAddressLookup.com'"><span></span>&nbsp;배송지 관리</li>
-			<li onclick="location.href='<%= ctxPath%>/mypage/orderList.com'"><span></span>&nbsp;주문내역</li>
-			<li onclick="location.href='<%= ctxPath%>/mypage/purchaseHistory.com'"><span></span>&nbsp;구매내역</li>
-			<li onclick="location.href='<%= ctxPath%>/product/myCart.com'"><span></span>&nbsp;장바구니</li>
-		</ul>
-	</div>
-   	<div id="miniContainer">
-		<h1>구매내역</h1>
-        <hr style="border: solid 1px gray;">
-        <!-- 장바구니에 들어있는 상품이 없으면 -->
-      <c:if test="">
-         <span style="color: red; font-size: 20pt;">장바구니가 비었습니다.</span><br><br>
-         <button id="goBack" type="button" class="btn btn-info">이전 페이지로</button>
-      </c:if>
+   <div id="menu">
 
-      <!--장바구니에 들어있는 상품이 있으면  -->
-      <c:if test="">
+      <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;마이페이지</h3>
+      <ul id="menu">
+         <li onclick="location.href='<%=ctxPath%>/mypage/myInfo.com'"><span></span>&nbsp;내 정보 확인/수정</li>
+         <li onclick="location.href='<%=ctxPath%>/member/shippingAddressLookup.com'"><span></span>&nbsp;배송지 관리</li>
+         <li onclick="location.href='<%=ctxPath%>/mypage/orderList.com'"><span></span>&nbsp;주문내역</li>
+         <li onclick="location.href='<%=ctxPath%>/mypage/purchaseHistory.com'"><span></span>&nbsp;구매내역</li>
+         <li onclick="location.href='<%=ctxPath%>/product/myCart.com'"><span></span>&nbsp;장바구니</li>
+      </ul>
+   </div>
+   <div id="miniContainer">
+      <h1>구매내역</h1>
+      <hr style="border: solid 1px gray;">
 
-         <span class="head">제품</span><span class="head">가격</span><span class="head">수량</span><span
-            class="head">합계</span>
-         <hr style="width: 680px; border: solid 1px gray;">
+      <c:if test="${empty purchaseList}">
+         <div>
 
-         <div id="allCheckBox">
-            <input type="checkbox" id="allCheck" name="allCheck" /> <label for="allCheck">전체 선택/해제</label>
+            <span>구매하신 물건이 없습니다! 첫 구매를 해보세요!</span>
+
+            <button type="button"
+               onclick="javascript:location.href='<%=ctxPath%>/product/productDisplay.com'">첫
+               구매하러 가기!</button>
          </div>
-         <br>
-
-
-            <c:forEach var="product" items="${cartList}">
-               <div class="item">
-                  <input type="checkbox" class="individualCheck"><br>
-                  <span class="left">${product.krproductname}</span><br>
-                  <div class="productImg">
-                     <img class="left" src="../images/${product.productimg1}" />
-                  </div>
-                  
-                  <input class="ipPrice" type="hidden" value="${product.pprice}" /> 
-                  <span class="cost left pPrice">￦<fmt:formatNumber value="${product.pprice}" pattern="#,###" /></span>
-                  
-                  <input class="poqty left" type="number" min="1" value="${product.poqty}" />
-                  
-				  <input class="itotalPrice" type="hidden" value="${product.totalprice}" />
-                  <span class="cost left totalPrice">￦<fmt:formatNumber value="${product.totalprice}" pattern="#,###" /></span><br>
-                  
-                  <button type="button" class="individualDelete mybtn2">삭제</button>
-                  <button type="button" class="save mybtn2">저장</button>
-                  <input type="hidden" class="cartno" value="${product.cartno}" />
-                  <input type="hidden" class="optionno" value="${product.fk_optioncode}" />
-               </div>
-               <br><br>
-
-            </c:forEach>
-
-
-         <div id="rightDiv" class="order-wrap">
-         	<form name="cartForm">
-               <input type="hidden" name="purchasecartno" value="" />
-               <input type="hidden" name="purchaseoption" value="" />
-  		       <input type="hidden" name="sumPrice" value="" />
-  		       <input type="hidden" name="deliveryCharge" value="" />
-  		       <input type="hidden" name="totalCost" value="" />
-         	</form>
-               <ul class="order-con">
-			      <li>
-			         <span>전체 품목 합계</span>
-			       	 <span id="sumPrice">0</span><span>￦</span>
-			      </li>
-			      <li>
-			         <span>배송비</span>
-		 			 <span id="deliveryCharge">0</span><span>￦</span>
-			      </li>
-			      <li>
-			         <span>총합계</span>
-			         <span id="totalCost">0</span><span>￦</span>
-			      </li>
-			   </ul>
-			   <div class="order-btn">
-			      <button id="checkedCardSlash" type="button" class="mybtn">선택 상품 결제하기</button>
-			      <button id="cardSlash" type="button" class="mybtn">전체 상품 결제하기</button>
-			   </div>
-            </div>
-		 
-         <button id="selectDelete" type="button" class="left mybtn">선택삭제</button>
-         <button id="allDelete" type="button" class="left mybtn">전체삭제</button>
-
-
       </c:if>
-        
-        
-        
-        
-        
-   	</div>
+
+      <c:if test="${not empty purchaseList}">
+
+
+         <table style="width: 100%;">
+
+            <thead style="border-bottom: solid 1px gray;">
+               <tr>
+                  <th style="padding: 20px;">주문번호</th>
+                  <th style="padding: 20px;">상품 이미지</th>
+                  <th style="padding: 20px;">상품 이름</th>
+                  <th style="padding: 20px;">선택 옵션</th>
+                  <th style="padding: 20px;">주문 수량</th>
+                  <th style="padding: 20px;">리뷰 작성</th>
+
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td colspan="5" style="padding: 20px; font-size: 35px; font-weight: bold; color: gray;" align="left">${week[0]}</td>
+               </tr>
+               <c:forEach items="${purchaseList}" var="purchase"
+                  varStatus="status">
+                  <c:if test="${purchase.paymentdate eq 0}">
+                     <tr style="border-bottom: solid 1px gray; padding-top: 20px;">
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.paymentno}</span></td>
+                        <td style="padding: 20px;">
+                           <img src="/Covengers/images/${purchase.productimg1}" width="120px" height="200px"">
+                        </td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.krproductname}</span></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.optionname}</span></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.orderqty}개</span></td>
+
+                        <c:if test="${purchase.reviewstatus eq 0 }">
+                           <td style="padding: 20px;">
+                              <input type="hidden" class="productcode" name="productcode"   value="${purchase.productcode}">
+                              <input type="hidden" class="paymentno" name="paymentno" value="${purchase.paymentno}">
+                              <button type="button" class="goReview" style="white-space: nowrap; cursor: pointer; border:none; background-color: rgba(0,0,0,0);">리뷰쓰기</button>
+                           </td>
+                        </c:if>
+                        <c:if test="${purchase.reviewstatus eq 1}">
+                           <td style="padding: 20px;">
+                              <input type="hidden" class="productcode" name="productcode"   value="${purchase.productcode}">
+                              <input type="hidden" class="paymentno" name="paymentno" value="${purchase.paymentno}">
+                              <span class="getReview" style="cursor: pointer;">리뷰 작성 완료 - 보기</span>
+                           </td>
+                        </c:if>
+                     </tr>
+                  </c:if>
+               </c:forEach>
+               <tr>
+                  <td colspan="5" style="padding: 20px; font-size: 35px; font-weight: bold; color: gray;"" align="left">${week[1]}</td>
+               </tr>
+               <c:forEach items="${purchaseList}" var="purchase"
+                  varStatus="status">
+                  <c:if test="${purchase.paymentdate eq 1}">
+                     
+                     <tr style="border-bottom: solid 1px gray; padding-top: 20px;">
+                     <td style="padding: 20px;"><span  style="font-size: 20px; font-weight: bold;" >${purchase.paymentno}</span></td>
+                        <td style="padding: 20px;"><img
+                           src="/Covengers/images/${purchase.productimg1}" width="120px"
+                           height="200px""></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.krproductname}</span></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.optionname}</span></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.orderqty}</span></td>
+
+                        <c:if test="${purchase.reviewstatus eq 0 }">
+                           <td style="padding: 20px;">
+                                 <input type="hidden" class="productcode" name="productcode"   value="${purchase.productcode}">
+                                 <input type="hidden" class="paymentno" name="paymentno" value="${purchase.paymentno}">
+                                 <button type="button" class="goReview" style="white-space: nowrap; cursor: pointer; border:none; background-color: rgba(0,0,0,0);">리뷰쓰기</button>
+                           </td>
+                        </c:if>
+                        <c:if test="${purchase.reviewstatus eq 1}">
+                           <td style="padding: 20px;">
+                              <input type="hidden" class="productcode" name="productcode"   value="${purchase.productcode}">
+                              <input type="hidden" class="paymentno" name="paymentno" value="${purchase.paymentno}">
+                              <span class="getReview" style="cursor: pointer;">리뷰 작성 완료 - 보기</span>
+                           </td>
+                        </c:if>
+                     </tr>
+                  </c:if>
+               </c:forEach>
+
+               <tr>
+                  <td colspan="5" style="padding: 20px; font-size: 35px; font-weight: bold; color: gray;"" align="left">${week[2]}</td>
+               </tr>
+               <c:forEach items="${purchaseList}" var="purchase"
+                  varStatus="status">
+                  <c:if test="${purchase.paymentdate eq 2}">
+                     
+                     <tr style="border-bottom: solid 1px gray; padding-top: 20px;">
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.paymentno}</span></td>
+                        <td style="padding: 20px;"><img
+                           src="/Covengers/images/${purchase.productimg1}" width="120px"
+                           height="200px""></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.krproductname}</span></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.optionname}</span></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.orderqty}</span></td>
+
+                        <c:if test="${purchase.reviewstatus eq 0 }">
+                           <td style="padding: 20px;">
+                                 <input type="hidden" class="productcode" name="productcode"   value="${purchase.productcode}">
+                                 <input type="hidden" class="paymentno" name="paymentno" value="${purchase.paymentno}">
+                                 <button type="button" class="goReview" style="white-space: nowrap; cursor: pointer; border:none; background-color: rgba(0,0,0,0);">리뷰쓰기</button>
+                        </c:if>
+                        <c:if test="${purchase.reviewstatus eq 1}">
+                           <td style="padding: 20px;">
+                              <input type="hidden" class="productcode" name="productcode"   value="${purchase.productcode}">
+                              <input type="hidden" class="paymentno" name="paymentno" value="${purchase.paymentno}">
+                              <span class="getReview" style="cursor: pointer;">리뷰 작성 완료 - 보기</span>
+                           </td>
+                        </c:if>
+                     </tr>
+                  </c:if>
+               </c:forEach>
+               <tr>
+                  <td colspan="5" style="padding: 20px; font-size: 35px; font-weight: bold; color: gray;"" align="left">${week[3]}</td>
+               </tr>
+               <c:forEach items="${purchaseList}" var="purchase"
+                  varStatus="status">
+                  <c:if test="${purchase.paymentdate eq 3}">
+                     
+                     <tr style="border-bottom: solid 1px gray; padding-top: 20px;">
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.paymentno}</span></td>
+                        <td style="padding: 20px;"><img
+                           src="/Covengers/images/${purchase.productimg1}" width="120px"
+                           height="200px""></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.krproductname}</span></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.optionname}</span></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.orderqty}</span></td>
+
+                        <c:if test="${purchase.reviewstatus eq 0 }">
+                           <td style="padding: 20px;">
+                                 <input type="hidden" class="productcode" name="productcode"   value="${purchase.productcode}">
+                                 <input type="hidden" class="paymentno" name="paymentno" value="${purchase.paymentno}">
+                                 <button type="button" class="goReview" style="white-space: nowrap; cursor: pointer; border:none; background-color: rgba(0,0,0,0);">리뷰쓰기</button>
+                           </td>
+                        </c:if>
+                        <c:if test="${purchase.reviewstatus eq 1}">
+                           <td style="padding: 20px;">
+                              <input type="hidden" class="productcode" name="productcode"   value="${purchase.productcode}">
+                              <input type="hidden" class="paymentno" name="paymentno" value="${purchase.paymentno}">
+                              <span class="getReview" style="cursor: pointer;">리뷰 작성 완료 - 보기</span>
+                           </td>
+                        </c:if>
+                     </tr>
+                  </c:if>
+               </c:forEach>
+               <tr>
+                  <td colspan="5" style="padding: 20px; font-size: 35px; font-weight: bold; color: gray;"" align="left">${week[4]}</td>
+               </tr>
+               <c:forEach items="${purchaseList}" var="purchase"
+                  varStatus="status">
+                  <c:if test="${purchase.paymentdate eq 4}">
+                     
+                     <tr style="border-bottom: solid 1px gray; padding-top: 20px;">
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.paymentno}</span></td>
+                        <td style="padding: 20px;"><img
+                           src="/Covengers/images/${purchase.productimg1}" width="120px"
+                           height="200px""></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.krproductname}</span></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.optionname}</span></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.orderqty}</span></td>
+
+                        <c:if test="${purchase.reviewstatus eq 0 }">
+                           <td style="padding: 20px;">
+                                 <input type="hidden" class="productcode" name="productcode"   value="${purchase.productcode}">
+                                 <input type="hidden" class="paymentno" name="paymentno" value="${purchase.paymentno}">
+                                 <button type="button" class="goReview" style="white-space: nowrap; cursor: pointer; border:none; background-color: rgba(0,0,0,0);">리뷰쓰기</button>
+                        </c:if>
+                        <c:if test="${purchase.reviewstatus eq 1}">
+                           <td style="padding: 20px;">
+                              <input type="hidden" class="productcode" name="productcode"   value="${purchase.productcode}">
+                              <input type="hidden" class="paymentno" name="paymentno" value="${purchase.paymentno}">
+                              <span class="getReview" style="cursor: pointer;">리뷰 작성 완료 - 보기</span>
+                           </td>
+                        </c:if>
+                     </tr>
+                  </c:if>
+               </c:forEach>
+               <tr>
+                  <td colspan="5" style="padding: 20px; font-size: 35px; font-weight: bold; color: gray;"" align="left">${week[5]}</td>
+               </tr>
+               <c:forEach items="${purchaseList}" var="purchase"
+                  varStatus="status">
+                  <c:if test="${purchase.paymentdate eq 5}">
+                     
+                     <tr style="border-bottom: solid 1px gray; padding-top: 20px;">
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.paymentno}</span></td>
+                        <td style="padding: 20px;"><img
+                           src="/Covengers/images/${purchase.productimg1}" width="120px"
+                           height="200px""></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.krproductname}</span></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.optionname}</span></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.orderqty}</span></td>
+
+                        <c:if test="${purchase.reviewstatus eq 0 }">
+                           <td style="padding: 20px;">
+                                 <input type="hidden" class="productcode" name="productcode"   value="${purchase.productcode}">
+                                 <input type="hidden" class="paymentno" name="paymentno" value="${purchase.paymentno}">
+                                 <button type="button" class="goReview" style="white-space: nowrap; cursor: pointer; border:none; background-color: rgba(0,0,0,0);">리뷰쓰기</button>
+                        </c:if>
+                        <c:if test="${purchase.reviewstatus eq 1}">
+                           <td style="padding: 20px;">
+                              <input type="hidden" class="productcode" name="productcode"   value="${purchase.productcode}">
+                              <input type="hidden" class="paymentno" name="paymentno" value="${purchase.paymentno}">
+                              <span class="getReview" style="cursor: pointer;">리뷰 작성 완료 - 보기</span>
+                           </td>
+                        </c:if>
+                     </tr>
+                  </c:if>
+               </c:forEach>
+               <tr>
+                  <td colspan="5" style="padding: 20px; font-size: 35px; font-weight: bold; color: gray;"" align="left">${week[6]}</td>
+               </tr>
+               <c:forEach items="${purchaseList}" var="purchase"
+                  varStatus="status">
+                  <c:if test="${purchase.paymentdate eq 6}">
+                     
+                     <tr style="border-bottom: solid 1px gray; padding-top: 20px;">
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.paymentno}</span></td>
+                        <td style="padding: 20px;"><img
+                           src="/Covengers/images/${purchase.productimg1}" width="120px"
+                           height="200px""></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.krproductname}</span></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.optionname}</span></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.orderqty}</span></td>
+
+                        <c:if test="${purchase.reviewstatus eq 0 }">
+                           <td style="padding: 20px;">
+                              <input type="hidden" class="productcode" name="productcode"   value="${purchase.productcode}">
+                              <input type="hidden" class="paymentno" name="paymentno" value="${purchase.paymentno}">
+                              <button type="button" class="goReview" style="white-space: nowrap; cursor: pointer; border:none; background-color: rgba(0,0,0,0);">리뷰쓰기</button>
+                           </td>
+                        </c:if>
+                        <c:if test="${purchase.reviewstatus eq 1}">
+                           <td style="padding: 20px;">
+                              <input type="hidden" class="productcode" name="productcode"   value="${purchase.productcode}">
+                              <input type="hidden" class="paymentno" name="paymentno" value="${purchase.paymentno}">
+                              <span class="getReview" style="cursor: pointer;">리뷰 작성 완료 - 보기</span>
+                           </td>
+                        </c:if>
+                     </tr>
+                  </c:if>
+               </c:forEach>
+
+            </tbody>
+         </table>
+      </c:if>
+
+
+
+
+   </div>
+
+
+
 </div>
-    
-  
+
+<form name="reviewForm">
+   <input type="hidden" id="productcode" name="productcode1">
+   <input type="hidden" id="paymentno" name="paymentno1">
+                                 
+</form>
+
+<jsp:include page="../covengers_footer.jsp"></jsp:include> 

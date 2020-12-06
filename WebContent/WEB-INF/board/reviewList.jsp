@@ -23,8 +23,6 @@
 
 </script>
 
-<body>
-
 	<div id="container">
 		<h1>리 뷰</h1>
       	<hr style="border: solid 1px gray;">
@@ -61,5 +59,4 @@
   
 	</div>
 	
-</body>
-</html>
+<jsp:include page="../covengers_footer.jsp"></jsp:include> 

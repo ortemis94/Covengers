@@ -5,7 +5,7 @@
 <%@page isELIgnored="false" %>
 
 <%
-	String ctxPath = request.getContextPath();
+   String ctxPath = request.getContextPath();
 %>
 
 
@@ -35,33 +35,34 @@
 </head>
 
 <style>
-	table, tr, td {
-		width : 500px;
-		  border-spacing: 500px;
-	}
+
+  td, th{
+     white-space: nowrap;
+}
+   
 </style>
-	
+   
 <script>
-	
-	$(document).ready(function() {
-		
-		$("tr.productInfo").click(function() {
-						
-			var productcode = $(this).children("td.productcode").text();
-			
-			var frm = document.modifyProductFrm;
-			frm.productcode.value = productcode;
-			
-			frm.action = "<%= ctxPath%>/admin/productModify.com";
-			frm.method = "POST";
-			frm.submit();
-			 
-		});
-		
-		
-	});
-	
-	
+   
+   $(document).ready(function() {
+      
+      $("tr.productInfo").click(function() {
+                  
+         var productcode = $(this).children("td.productcode").text();
+         
+         var frm = document.modifyProductFrm;
+         frm.productcode.value = productcode;
+         
+         frm.action = "<%= ctxPath%>/admin/productModify.com";
+         frm.method = "POST";
+         frm.submit();
+          
+      });
+      
+      
+   });
+   
+   
 </script>
 <body id="page-top">
 
@@ -86,7 +87,7 @@
 
       <!-- Heading -->
       <div class="sidebar-heading">
-        	관리자 메뉴
+           관리자 메뉴
       </div>
 
 
@@ -149,50 +150,48 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table" id="dataTable" width="100%" >
                   <thead>
                     <tr>
-                      <th>상품코드</th>
-                      <th>상품종류코드</th>
-                      <th>상품 카테고리 코드</th>
-                      <th>상품영문이름</th>
-                      <th>상품한글이름</th>
-                      <th>productimg1</th>
-                      <th>productimg2</th>
+                      <th>상품 코드</th>
+                      <th>종류 코드</th>
+                      <th>카테고리 코드</th>
+                      <th>영어이름</th>
+                      <th>한글이름</th>
+                      <th>사진</th>
                       <th>가격</th>
                       <th>원산지</th>
-                      <th>상품설명</th>
-                      <th>입고날짜</th>
+                      <th>간단 설명</th>
+                      <th>입고 날짜</th>
                       <th>유통기한</th>
-                      <th>상품설명1</th>
-                      <th>상품설명2</th>
-                      <th>원료</th>
-                      <th>주의사항</th>
-                      <th>상품 상태</th>
+                      <th>설명1</th>
+                      <th>설명2</th>
+                      <th>성분</th>
+<!--                       <th>주의사항</th>
+ -->                      <th>상품 상태</th>
                     </tr>
                   </thead>
                   <tbody>
-					<c:forEach var="pvo" items="${pList}">
-						<tr class="productInfo">
-							<td class="productcode">${pvo.productcode}</td>
-							<td>${pvo.fk_kindcode}</td>
-							<td>${pvo.fk_categorycode}</td>
-							<td>${pvo.enproductname}</td>
-							<td>${pvo.krproductname}</td>
-							<td>${pvo.productimg1}</td>
-							<td>${pvo.productimg2}</td>
-							<td>${pvo.price}</td>
-							<td>${pvo.origin}</td>
-							<td>${pvo.productdescshort}</td>
-							<td>${pvo.productinputdate}</td>
-							<td>${pvo.expiredate}</td>
-							<td>${pvo.productdesc1}</td>
-							<td>${pvo.productdesc2}</td>
-							<td>${pvo.ingredient}</td>
-							<td>${pvo.precautions}</td>
-							<td>${pvo.productstatus}</td>
-						</tr>
-					</c:forEach>
+               <c:forEach var="pvo" items="${pList}">
+                  <tr class="productInfo">
+                     <td class="productcode">${pvo.productcode}</td>
+                     <td>${pvo.fk_kindcode}</td>
+                     <td>${pvo.fk_categorycode}</td>
+                     <td>${pvo.enproductname}</td>
+                     <td>${pvo.krproductname}</td>
+                     <td>${pvo.productimg1}</td>
+                     <td>${pvo.price}</td>
+                     <td>${pvo.origin}</td>
+                     <td>${pvo.productdescshort}</td>
+                     <td>${pvo.productinputdate}</td>
+                     <td>${pvo.expiredate}</td>
+                     <td>${pvo.productdesc1}</td>
+                     <td>${pvo.productdesc2}</td>
+                     <td>${pvo.ingredient}</td>
+<%--                      <td>${pvo.precautions}</td>
+ --%>                     <td>${pvo.productstatus}</td>
+                  </tr>
+               </c:forEach>
                   </tbody>
                 </table>
               </div>
@@ -233,7 +232,7 @@
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">Ã</span>
+            <span aria-hidden="true">Ã </span>
           </button>
         </div>
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
@@ -247,7 +246,7 @@
 
   <%-- ======================================= --%>
   <form name="modifyProductFrm">
-  	<input type="hidden" name="productcode" /> 
+     <input type="hidden" name="productcode" /> 
   </form>
   <%-- ======================================= --%>
   
