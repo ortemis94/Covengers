@@ -3,7 +3,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
     
-<jsp:include page="../covengers_header.jsp"></jsp:include> 
 <title>배송지변경</title>
 
 
@@ -318,5 +317,3 @@
     </form>
 </div>
    
-   
-<jsp:include page="../covengers_footer.jsp"></jsp:include> 

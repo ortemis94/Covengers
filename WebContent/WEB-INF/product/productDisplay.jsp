@@ -125,7 +125,7 @@ a:hover {
 </div>
 
 
-<div class="display">
+<div class="display" style="padding-bottom: 200px;">
 
 
 	<c:forEach var="productVO" items="${productList}" varStatus="status">
@@ -153,6 +153,7 @@ a:hover {
 
 	
 </div>
-	
-</div>
+
+<div class="col-md-12" style="height: 100px;"></div>
+
 <jsp:include page="../covengers_footer.jsp"></jsp:include> 

@@ -7,10 +7,8 @@
 %>
 
 
-<jsp:include page="../covengers_header.jsp"></jsp:include> 
 
 <title>배송지 목록</title>
-
 
 
 <jsp:include page="../covengers_header.jsp"></jsp:include>
@@ -194,7 +192,7 @@
 
 
    <div id="miniContainer">
-         <h1>내 정보 확인</h1>
+         <h1>배송지 관리</h1>
            <hr style="border: solid 1px gray;">
       </div>
 </div>

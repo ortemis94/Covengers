@@ -92,14 +92,14 @@ div#product-name {
 
 div#inner-product-dp {
    width: 90%;
-   height: 60%;
+   height: 400px;
    overflow: hidden;
    margin: auto;
 }
 
 div.product-img-dp {
-   height: 100%;
-   width: 450px
+   height: 400px;
+   width: 450px;
    line-height: 1px; 
    padding: 2%;
    border-radius: 4%;
@@ -236,8 +236,6 @@ button.btn-action {
 </style>
 
 
-
-
 <c:if test="${not empty productList }">
    <div style="height: 90%; width:20%; position: absolute; top: 65%; left: 90%; transform: translate(-50%, -50%);" align="center">
       <div>
@@ -300,7 +298,7 @@ button.btn-action {
    
    <div id="inner-product-dp">
       <div class="col-md-6 product-img-dp" align="center">
-         <img alt="perfume1" src="/Covengers/images/${product.productimg1}">
+         <img src="/Covengers/images/${product.productimg1}">
       </div>
 
       <div class="col-md-1"></div>

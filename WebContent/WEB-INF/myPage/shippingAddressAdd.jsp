@@ -3,7 +3,6 @@
     <%
        String ctxPath = request.getContextPath();
     %>
-<jsp:include page="../covengers_header.jsp"></jsp:include> 
 <title>배송지 추가</title>
 
 <style type="text/css">
@@ -277,7 +276,6 @@
       </div>
     </form>
 </div>
-<jsp:include page="../covengers_footer.jsp"></jsp:include> 
 
 </body>
 </html>
