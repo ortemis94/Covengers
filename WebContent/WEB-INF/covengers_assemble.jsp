@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
+
 <%
     String ctxPath = request.getContextPath();
     //    /MyMVC
@@ -15,7 +16,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	
+   
   <title>Covengers</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
@@ -28,7 +29,7 @@
   
   <link href="/Covengers/assets/css/login-register.css" rel="stylesheet" />
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-	
+   
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
@@ -126,46 +127,46 @@ h2#mainProduct {
 }
 
 img#gif {
-	width : 100%;
-	height : 150px;
+   width : 100%;
+   height : 150px;
 }
 
 div.text-block {
-	background-color: rgba( 255, 255, 255, 0 );
+   background-color: rgba( 255, 255, 255, 0 );
 }
 
 .myimage {
-	height: 600px;
-	margin: 50px 0;
+   height: 600px;
+   margin: 50px 0;
 }
 
 
 .mycontainer {
-	display: inline-flex;
-	background: rgba( 0, 0, 0, 0.7 );
+   display: inline-flex;
+   background: rgba( 0, 0, 0, 0.7 );
 }
 
 .services {
-	height: 95vh;
+   height: 95vh;
 }
 
 .adtitle {
-	color: white;
-	font-weight: bold;
+   color: white;
+   font-weight: bold;
 }
 
 .addesc {
-	color: white;
+   color: white;
 }
 
 .myp {
-	font-family: Poppins, Raleway, sans-serif;
-	font-size: 25pt;
-	color: white;
+   font-family: Poppins, Raleway, sans-serif;
+   font-size: 25pt;
+   color: white;
 }
 
 a {
-	height: 60px;
+   height: 60px;
 }
 
 </style>
@@ -173,82 +174,82 @@ a {
 
 
 <script type="text/javascript">
-	
-	$(document).ready(function (){
-		
-		$("input#password7").keydown(function(key) {
-			if (key.keyCode == 13) {
-				login();
-			}
-		});
-		
-	});
-	
+   
+   $(document).ready(function (){
+      
+      $("input#password7").keydown(function(key) {
+         if (key.keyCode == 13) {
+            login();
+         }
+      });
+      
+   });
+   
     function login() {
-    	var frm = document.loginFrm;
-	    frm.action = "<%= request.getContextPath()%>/member/login2.com";
-	    frm.method = "post";
-	    frm.submit();
+       var frm = document.loginFrm;
+       frm.action = "<%= request.getContextPath()%>/member/login2.com";
+       frm.method = "post";
+       frm.submit();
     }
     
 
-	function searchEmail() {
-		
-		$.ajax({
-    		url:"<%= ctxPath%>/member/searchEmail.com",
-    		data:{"name":$("input#name").val(), "password":$("input#sepassword").val()}, 
-    		type:"post",
-    		dataType:"json",  
-    		success:function(json){
-    			    			
-    			if (json.email == null) {
-    				alert(" You don't have account ")
-    			} else {
-        			alert("Your Email is " + json.email);
-    			}		
-    			
-    		},
-    		error: function(request, status, error){
-				alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+   function searchEmail() {
+      
+      $.ajax({
+          url:"<%= ctxPath%>/member/searchEmail.com",
+          data:{"name":$("input#name").val(), "password":$("input#sepassword").val()}, 
+          type:"post",
+          dataType:"json",  
+          success:function(json){
+                          
+             if (json.email == null) {
+                alert(" You don't have account ")
+             } else {
+                 alert("Your Email is " + json.email);
+             }      
+             
+          },
+          error: function(request, status, error){
+            alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
 
-			}
-    		
-    	});
-					
-	}
+         }
+          
+       });
+               
+   }
 
-	function searchPassword() {
-		
-		$.ajax({
-    		url:"<%= ctxPath%>/member/searchUser.com",
-    		data:{"email":$("input#email2").val(), "name":$("input#name2").val()}, 
-    		type:"post",
-    		dataType:"json",  
-    		success:function(json){
-    			
-    			if ("1" != json.n) {
-    				alert(" You don't have account ");
-    			}else {
-    				changePW();
-    			}
-    			
-    		},
-    		error: function(request, status, error){
-				alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+   function searchPassword() {
+      
+      $.ajax({
+          url:"<%= ctxPath%>/member/searchUser.com",
+          data:{"email":$("input#email2").val(), "name":$("input#name2").val()}, 
+          type:"post",
+          dataType:"json",  
+          success:function(json){
+             
+             if ("1" != json.n) {
+                alert(" You don't have account ");
+             }else {
+                changePW();
+             }
+             
+          },
+          error: function(request, status, error){
+            alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
 
-			}
-    		
-    	});
+         }
+          
+       });
 
-		
-	}
-	
-	function changePW() {
-    	var frm = document.pwForm;
-	    frm.action = "<%=request.getContextPath()%>/member/updatePassword.com";
-		frm.method = "post";
-		frm.submit();
-	}
+      
+   }
+   
+   function changePW() {
+       var frm = document.pwForm;
+       frm.action = "<%=request.getContextPath()%>/member/updatePassword.com";
+      frm.method = "post";
+      frm.submit();
+   }
     
     
     
@@ -273,77 +274,77 @@ a {
           
           
         <c:if test="${ sessionScope.loginuser != null }">
-			<li><a href="<%= ctxPath%>/member/logout.com">Logout</a></li>
-		</c:if>
-			      
-		  
-		<c:if test="${ sessionScope.loginuser == null }">
-			<li><a href="<%= ctxPath%>/member/register.com">Register</a></li>
-          	<li><a data-toggle="modal" data-target="#loginModal">Login</a></li>
-		</c:if>
-		  
+         <li><a href="<%= ctxPath%>/member/logout.com">Logout</a></li>
+      </c:if>
+               
+        
+      <c:if test="${ sessionScope.loginuser == null }">
+         <li><a href="<%= ctxPath%>/member/register.com">Register</a></li>
+             <li><a data-toggle="modal" data-target="#loginModal">Login</a></li>
+      </c:if>
+        
           
         <li class="drop-down"><a href="<%=ctxPath%>/product/productDisplay.com">Product</a>
-	       <ul>
-	       <li class="drop-down"><a href="#">PERFUME</a>
-			<ul>
-		   	  <c:forEach var="list" items="${categoryInfo}" varStatus="status">
-				<c:if test="${list.fk_kindcode eq 'PF'}">
-				  <li><a href="<%=ctxPath%>/product/productDisplay.com?categorycode=${list.fk_categorycode}">${list.encategoryname}</a></li>
-				</c:if>
-		      </c:forEach>
-			</ul>
-		   </li>
-	       <li class="drop-down"><a href="#">DIFFUSER</a>
-			<ul>
-		   	  <c:forEach var="list" items="${categoryInfo}" varStatus="status">
-				<c:if test="${list.fk_kindcode eq 'DF'}">
-				  <li><a href="<%=ctxPath%>/product/productDisplay.com?categorycode=${list.fk_categorycode}">${list.encategoryname}</a></li>
-				</c:if>
-		      </c:forEach>
-			</ul>
-		   </li>
-	       <li class="drop-down"><a href="#">CANDLE</a>
-			<ul>
-		   	  <c:forEach var="list" items="${categoryInfo}" varStatus="status">
-				<c:if test="${list.fk_kindcode eq 'CD'}">
-				  <li><a href="<%=ctxPath%>/product/productDisplay.com?categorycode=${list.fk_categorycode}">${list.encategoryname}</a></li>
-				</c:if>
-		      </c:forEach>
-			</ul>
-		   </li>
-	       <li class="drop-down"><a href="#">INCENSE</a>
-			<ul>
-		   	  <c:forEach var="list" items="${categoryInfo}" varStatus="status">
-				<c:if test="${list.fk_kindcode eq 'IC'}">
-				  <li><a href="<%=ctxPath%>/product/productDisplay.com?categorycode=${list.fk_categorycode}">${list.encategoryname}</a></li>
-				</c:if>
-		      </c:forEach>
-			</ul>
-		   </li>
-	      </ul>
-	    </li>
-	    
-	    <li class="drop-down"><a href="<%= ctxPath%>/board/faq.com">board</a>
-			 <ul>
-			 	<li><a href="<%= ctxPath%>/board/faq.com">FAQ</a></li>
-			    <li><a href="<%= ctxPath%>/board/qnaList.com">QnA</a></li>
-			    <li><a href="<%= ctxPath%>/product/showReview.com">REVIEW</a></li>
-			 </ul>
-		</li>
-	    
+          <ul>
+          <li class="drop-down"><a href="#">PERFUME</a>
+         <ul>
+              <c:forEach var="list" items="${categoryInfo}" varStatus="status">
+            <c:if test="${list.fk_kindcode eq 'PF'}">
+              <li><a href="<%=ctxPath%>/product/productDisplay.com?categorycode=${list.fk_categorycode}">${list.encategoryname}</a></li>
+            </c:if>
+            </c:forEach>
+         </ul>
+         </li>
+          <li class="drop-down"><a href="#">DIFFUSER</a>
+         <ul>
+              <c:forEach var="list" items="${categoryInfo}" varStatus="status">
+            <c:if test="${list.fk_kindcode eq 'DF'}">
+              <li><a href="<%=ctxPath%>/product/productDisplay.com?categorycode=${list.fk_categorycode}">${list.encategoryname}</a></li>
+            </c:if>
+            </c:forEach>
+         </ul>
+         </li>
+          <li class="drop-down"><a href="#">CANDLE</a>
+         <ul>
+              <c:forEach var="list" items="${categoryInfo}" varStatus="status">
+            <c:if test="${list.fk_kindcode eq 'CD'}">
+              <li><a href="<%=ctxPath%>/product/productDisplay.com?categorycode=${list.fk_categorycode}">${list.encategoryname}</a></li>
+            </c:if>
+            </c:forEach>
+         </ul>
+         </li>
+          <li class="drop-down"><a href="#">INCENSE</a>
+         <ul>
+              <c:forEach var="list" items="${categoryInfo}" varStatus="status">
+            <c:if test="${list.fk_kindcode eq 'IC'}">
+              <li><a href="<%=ctxPath%>/product/productDisplay.com?categorycode=${list.fk_categorycode}">${list.encategoryname}</a></li>
+            </c:if>
+            </c:forEach>
+         </ul>
+         </li>
+         </ul>
+       </li>
+       
+       <li class="drop-down"><a href="<%= ctxPath%>/board/faq.com">board</a>
+          <ul>
+             <li><a href="<%= ctxPath%>/board/faq.com">FAQ</a></li>
+             <li><a href="<%= ctxPath%>/board/qnaList.com">QnA</a></li>
+             <li><a href="<%= ctxPath%>/product/showReview.com">REVIEW</a></li>
+          </ul>
+      </li>
+       
         <!--  <li><a href="#team">Brand</a></li>
         <li><a href="#contact">Contact Us</a></li> -->
-	
-		<li>
-			<c:if test="${sessionScope.loginuser.status ne 3}"><a href="<%=request.getContextPath()%>/mypage/myInfo.com"><img src="/Covengers/images/user5.png" style="width: 25px; height: 25px;" /></a></c:if>
-			<c:if test="${sessionScope.loginuser.status eq 3}"><a href="<%=request.getContextPath()%>/covengers.com"><img src="/Covengers/images/user5.png" style="width: 25px; height: 25px;" /></a></c:if>
-		</li>
+   
+      <li>
+         <c:if test="${sessionScope.loginuser.status ne 3}"><a href="<%=request.getContextPath()%>/mypage/myInfo.com"><img src="/Covengers/images/user5.png" style="width: 25px; height: 25px;" /></a></c:if>
+         <c:if test="${sessionScope.loginuser.status eq 3}"><a href="<%=request.getContextPath()%>/covengers.com"><img src="/Covengers/images/user5.png" style="width: 25px; height: 25px;" /></a></c:if>
+      </li>
         <li><a href="<%=request.getContextPath()%>/product/myCart.com"><img src="/Covengers/images/shopping-cart8.png" style="width: 25x; height: 25px; margin-top: 2px;" /></a></li>
-	
+   
         </ul>
       </nav><!-- .nav-menu -->
-	
+   
 
     </div>
     
@@ -351,169 +352,169 @@ a {
   </header><!-- End Header -->
   
 <div class="modal fade login" id="loginModal">
-		<div class="modal-dialog login animated">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-				</div>
-				<div class="modal-body">
-					<div class="box">
-						<div class="content">
-							<div class="social">
-								<a class="circle github" href="#"> <i
-									class="fa fa-github fa-fw"></i>
-								</a> <a id="google_login" class="circle google" href="#"> <i
-									class="fa fa-google-plus fa-fw"></i>
-								</a> <a id="facebook_login" class="circle facebook" href="#"> <i
-									class="fa fa-facebook fa-fw"></i>
-								</a>
-							</div>
-							<div class="division">
-								<div class="line l"></div>
-								<span>or</span>
-								<div class="line r"></div>
-							</div>
-							<div class="error"></div>
-							<div class="form loginBox">
-								<form accept-charset="UTF-8" name="loginFrm">
-									<input id="email" class="form-control" type="text"
-										placeholder="Email" name="email"> <input id="password7"
-										class="form-control" type="password" placeholder="Password"
-										name="pwd"> <input class="btn btn-default btn-login"
-										type="button" value="Login" onclick="login()"><br>
-									<a data-toggle="modal" data-target="#searchEmailModal">SearchEmail</a>&nbsp;&nbsp;&nbsp;
-									<a data-toggle="modal" data-target="#modifyPasswordModal">SearchPW</a>
-								</form>
-							</div>
-						</div>
-					</div>
-					<div class="box">
-						<div class="content registerBox" style="display: none;">
-							<div class="form">
-								<form method="" html="{:multipart=>true}" data-remote="true"
-									action="" accept-charset="UTF-8">
-									<input id="email" class="form-control" type="text"
-										placeholder="Email" name="email"> <input id="password"
-										class="form-control" type="password" placeholder="Password"
-										name="password"> <input id="password_confirmation"
-										class="form-control" type="password"
-										placeholder="Repeat Password" name="password_confirmation">
-									<input class="btn btn-default btn-register" type="button"
-										value="Create account" name="commit">
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<div class="forgot login-footer">
-						<span>Looking to <a href="javascript: showRegisterForm();">create
-								an account</a> ?
-						</span>
-					</div>
-					<div class="forgot register-footer" style="display: none">
-						<span>Already have an account?</span> <a
-							href="<%=ctxPath%>/member/LoginAction2.com">Login</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+      <div class="modal-dialog login animated">
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal"
+                  aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+               <div class="box">
+                  <div class="content">
+                     <div class="social">
+                        <a class="circle github" href="#"> <i
+                           class="fa fa-github fa-fw"></i>
+                        </a> <a id="google_login" class="circle google" href="#"> <i
+                           class="fa fa-google-plus fa-fw"></i>
+                        </a> <a id="facebook_login" class="circle facebook" href="#"> <i
+                           class="fa fa-facebook fa-fw"></i>
+                        </a>
+                     </div>
+                     <div class="division">
+                        <div class="line l"></div>
+                        <span>or</span>
+                        <div class="line r"></div>
+                     </div>
+                     <div class="error"></div>
+                     <div class="form loginBox">
+                        <form accept-charset="UTF-8" name="loginFrm">
+                           <input id="email" class="form-control" type="text"
+                              placeholder="Email" name="email"> <input id="password7"
+                              class="form-control" type="password" placeholder="Password"
+                              name="pwd"> <input class="btn btn-default btn-login"
+                              type="button" value="Login" onclick="login()"><br>
+                           <a data-toggle="modal" data-target="#searchEmailModal">SearchEmail</a>&nbsp;&nbsp;&nbsp;
+                           <a data-toggle="modal" data-target="#modifyPasswordModal">SearchPW</a>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+               <div class="box">
+                  <div class="content registerBox" style="display: none;">
+                     <div class="form">
+                        <form method="" html="{:multipart=>true}" data-remote="true"
+                           action="" accept-charset="UTF-8">
+                           <input id="email" class="form-control" type="text"
+                              placeholder="Email" name="email"> <input id="password"
+                              class="form-control" type="password" placeholder="Password"
+                              name="password"> <input id="password_confirmation"
+                              class="form-control" type="password"
+                              placeholder="Repeat Password" name="password_confirmation">
+                           <input class="btn btn-default btn-register" type="button"
+                              value="Create account" name="commit">
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="modal-footer">
+               <div class="forgot login-footer">
+                  <span>Looking to <a href="javascript: showRegisterForm();">create
+                        an account</a> ?
+                  </span>
+               </div>
+               <div class="forgot register-footer" style="display: none">
+                  <span>Already have an account?</span> <a
+                     href="<%=ctxPath%>/member/LoginAction2.com">Login</a>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 
 <!-- ID 찾기 모델 -->
-	<div class="modal fade login" id="searchEmailModal">
-		<div class="modal-dialog login animated">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-				</div>
-				<div class="modal-body">
-					<div class="box">
-						<div class="content">
+   <div class="modal fade login" id="searchEmailModal">
+      <div class="modal-dialog login animated">
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal"
+                  aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+               <div class="box">
+                  <div class="content">
 
 
-							<div class="error"></div>
-							<div class="form loginBox">
-								<form accept-charset="UTF-8" name="searchEmailFrm">
-									<h3>Please enter your name and password.</h3>
-									<input id="name" class="form-control" type="text" placeholder="name" name="name"> 
-									<input id="sepassword" class="form-control" type="password" placeholder="Password" name="password1"> 
-									<input class="btn btn-default btn-login" type="button" value="Search" onclick="searchEmail()"><br>
-								</form>
-							</div>
-						</div>
-					</div>
-					<div class="box">
-						<div class="content registerBox" style="display: none;">
-							<div class="form">
-								<form method="" html="{:multipart=>true}" data-remote="true"
-									action="" accept-charset="UTF-8">
-									<input id="email" class="form-control" type="text"
-										placeholder="Email" name="email"> <input id="password"
-										class="form-control" type="password" placeholder="Password"
-										name="password"> <input id="password_confirmation"
-										class="form-control" type="password"
-										placeholder="Repeat Password" name="password_confirmation">
-									<input class="btn btn-default btn-register" type="button"
-										value="Create account" name="commit">
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
+                     <div class="error"></div>
+                     <div class="form loginBox">
+                        <form accept-charset="UTF-8" name="searchEmailFrm">
+                           <h3>Please enter your name and password.</h3>
+                           <input id="name" class="form-control" type="text" placeholder="name" name="name"> 
+                           <input id="sepassword" class="form-control" type="password" placeholder="Password" name="password1"> 
+                           <input class="btn btn-default btn-login" type="button" value="Search" onclick="searchEmail()"><br>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+               <div class="box">
+                  <div class="content registerBox" style="display: none;">
+                     <div class="form">
+                        <form method="" html="{:multipart=>true}" data-remote="true"
+                           action="" accept-charset="UTF-8">
+                           <input id="email" class="form-control" type="text"
+                              placeholder="Email" name="email"> <input id="password"
+                              class="form-control" type="password" placeholder="Password"
+                              name="password"> <input id="password_confirmation"
+                              class="form-control" type="password"
+                              placeholder="Repeat Password" name="password_confirmation">
+                           <input class="btn btn-default btn-register" type="button"
+                              value="Create account" name="commit">
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
 
-			</div>
-		</div>
-	</div>
-	
+         </div>
+      </div>
+   </div>
+   
 <!-- 패스워드 수정하기 -->
-	<div class="modal fade login" id="modifyPasswordModal">
-		<div class="modal-dialog login animated">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-				</div>
-				<div class="modal-body">
-					<div class="box">
-						<div class="content">
+   <div class="modal fade login" id="modifyPasswordModal">
+      <div class="modal-dialog login animated">
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal"
+                  aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+               <div class="box">
+                  <div class="content">
 
 
-							<div class="error"></div>
-							<div class="form loginBox">
-								<form accept-charset="UTF-8" name="pwForm">
-									<h3>Please fill in your e-mail and name.</h3>
-									<input id="email2" class="form-control" type="text" placeholder="email1" name="email1"> 
-									<input id="name2" class="form-control" type="text" placeholder="name1"name="name1"> 
-									<input class="btn btn-default btn-login" type="button" value="Search" onclick="searchPassword()"><br>
-								</form>
-							</div>
-						</div>
-					</div>
-					<div class="box">
-						<div class="content registerBox" style="display: none;">
-							<div class="form">
-								<form method="" html="{:multipart=>true}" data-remote="true"
-									action="" accept-charset="UTF-8">
-									<input id="email" class="form-control" type="text"
-										placeholder="Email" name="email"> <input id="password"
-										class="form-control" type="password" placeholder="Password"
-										name="password"> <input id="password_confirmation"
-										class="form-control" type="password"
-										placeholder="Repeat Password" name="password_confirmation">
-									<input class="btn btn-default btn-register" type="button"
-										value="Create account" name="commit">
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
+                     <div class="error"></div>
+                     <div class="form loginBox">
+                        <form accept-charset="UTF-8" name="pwForm">
+                           <h3>Please fill in your e-mail and name.</h3>
+                           <input id="email2" class="form-control" type="text" placeholder="email1" name="email1"> 
+                           <input id="name2" class="form-control" type="text" placeholder="name1"name="name1"> 
+                           <input class="btn btn-default btn-login" type="button" value="Search" onclick="searchPassword()"><br>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+               <div class="box">
+                  <div class="content registerBox" style="display: none;">
+                     <div class="form">
+                        <form method="" html="{:multipart=>true}" data-remote="true"
+                           action="" accept-charset="UTF-8">
+                           <input id="email" class="form-control" type="text"
+                              placeholder="Email" name="email"> <input id="password"
+                              class="form-control" type="password" placeholder="Password"
+                              name="password"> <input id="password_confirmation"
+                              class="form-control" type="password"
+                              placeholder="Repeat Password" name="password_confirmation">
+                           <input class="btn btn-default btn-register" type="button"
+                              value="Create account" name="commit">
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
 
-			</div>
-		</div>
-	</div>	
+         </div>
+      </div>
+   </div>   
 
 
   <!-- ======= Hero Section ======= -->
@@ -530,29 +531,29 @@ a {
 
     <!-- ======= Services Section ======= -->
     <div id="adproduct">
-	    <c:forEach var="svo" items="${plist}" varStatus="status">
-		    <section id="services" class="services" style="background-image: url( 'images/adproduct_a${status.count}.png' )">
-		      <div class="container" >
-		        <div class="section-title" data-aos="fade-in" data-aos-delay="100">
-		          <h2 id="mainProduct">${svo.enproductname}</h2>
-		        </div>
-				<div class="container mycontainer" data-aos="fade-in" data-aos-delay="100">
-					<img src="/Covengers/images/${svo.productimg1}" class="image myimage">
-			        <!-- <div class="row"> -->
-			          <div class="col-md-24 col-lg-24 d-flex align-items-center mb-5 mb-lg-0">
-			            <div class="descBox" data-aos="fade-up">
-			              <h4 class="adtitle">${svo.krproductname}</h4>
-			              <p class="addesc">${svo.productdescshort}</p>
-			              <div><a href="<%=ctxPath %>/product/productDetail.com?productcode=${svo.productcode}">자세히보기</a></div>
-			            </div>
-			          </div>
-			       <!-- </div> -->
-				</div>
-		      </div>
-		    </section>
-	    </c:forEach>
+       <c:forEach var="svo" items="${plist}" varStatus="status">
+          <section id="services" class="services" style="background-image: url( 'images/adproduct_a${status.count}.png' )">
+            <div class="container" >
+              <div class="section-title" data-aos="fade-in" data-aos-delay="100">
+                <h2 id="mainProduct">${svo.enproductname}</h2>
+              </div>
+            <div class="container mycontainer" data-aos="fade-in" data-aos-delay="100">
+               <img src="/Covengers/images/${svo.productimg1}" class="image myimage">
+                 <!-- <div class="row"> -->
+                   <div class="col-md-24 col-lg-24 d-flex align-items-center mb-5 mb-lg-0">
+                     <div class="descBox" data-aos="fade-up">
+                       <h4 class="adtitle">${svo.krproductname}</h4>
+                       <p class="addesc">${svo.productdescshort}</p>
+                       <div><a href="<%=ctxPath %>/product/productDetail.com?productcode=${svo.productcode}">자세히보기</a></div>
+                     </div>
+                   </div>
+                <!-- </div> -->
+            </div>
+            </div>
+          </section>
+       </c:forEach>
     </div>
-	
+   
 
    
     <!-- ======= Cta Section ======= -->

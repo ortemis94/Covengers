@@ -6,42 +6,42 @@
 <script type="text/javascript">
 
     $(document).ready(function(){
-		
-		
-    	
+      
+       
     });
     
     function changePW() {
-    	
-    	ps1 = $("input#password").val();
-    	ps2 = $("input#confirmpassword").val();
-    	
-    	if (ps1 != ps2) {
-    		alert("false!");
-    	} else {
-    		
-    		$.ajax({
-        		url:"<%= ctxPath%>/member/updatePassword2.com",
-        		data:{"email":$("input#email").val(), "password":$("input#password").val()}, 
-        		type:"post",
-        		dataType:"json"
-        	});
-    		
-    		alert("sucess");
-    		location.href="<%=ctxPath%>/main.com"
-    	}
-    	
-    	
-    	
+       
+       ps1 = $("input#password").val();
+       ps2 = $("input#confirmpassword").val();
+       
+       
+       if (ps1 != ps2) {
+          alert("false!");
+       } else {
+          
+          $.ajax({
+              url:"<%= ctxPath%>/member/updatePassword3.com",
+              data:{"email":$("input#email").val(), "password":ps1}, 
+              type:"post",
+              dataType:"json"
+           });
+          
+          alert("비밀번호 변경에 성공했습니다! ");
+          location.href="<%=ctxPath%>/main.com"
+       }
+       
+       
+       
     }
     
     function searchPW() {
-    	
-    	var frm = document.pwForm;
-	    frm.action = "<%=request.getContextPath()%>/member/searchPwpage.com";
-		frm.method = "post";
-		frm.submit();
-    	
+       
+       var frm = document.pwForm;
+       frm.action = "<%=request.getContextPath()%>/member/searchPwpage.com";
+      frm.method = "post";
+      frm.submit();
+       
     }
     
   
@@ -51,20 +51,20 @@
 <head>
     <title>Login/Register Modal by Creative Tim</title>
 
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+   <meta charset="utf-8" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 
-	<style>body{padding-top: 60px;}</style>
+   <style>body{padding-top: 60px;}</style>
 
     <link href="../assets/css/bootstrap.css" rel="stylesheet" />
 
-	<link href="../assets/css/login-register.css" rel="stylesheet" />
-	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+   <link href="../assets/css/login-register.css" rel="stylesheet" />
+   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
 
-	<script src="../assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-	<script src="../assets/js/bootstrap.js" type="text/javascript"></script>
-	<script src="../assets/js/login-register.js" type="text/javascript"></script>
+   <script src="../assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+   <script src="../assets/js/bootstrap.js" type="text/javascript"></script>
+   <script src="../assets/js/login-register.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -73,20 +73,20 @@
         <div class="row">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-            	 <h3>Please fill in the password and password confirmation box.</h3>
+                <h3>Please fill in the password and password confirmation box.</h3>
                  <input id="email" class="email" type="hidden" name="email" value="${email}">
                  <input id="name" class="name" type="hidden" name="name" value="${name}">
-            	 <input id="password" class="form-control" type="password" placeholder="password" name="password"><br>
-            	 <input id="confirmpassword" class="form-control" type="password" placeholder="password confirm" name="confirmpassword"><br>
-            	 
+                <input id="password" class="form-control" type="password" placeholder="password" name="password"><br>
+                <input id="confirmpassword" class="form-control" type="password" placeholder="password confirm" name="confirmpassword"><br>
+                
                  <a class="btn big-login" data-toggle="modal" href="javascript:void(0)" onclick="changePW();">CHANGE PASSWORD</a><br>
             <div class="col-sm-4"></div>
         </div>
-	</form>
-		 <div class="modal fade login" id="loginModal">
-		      <div class="modal-dialog login animated">
-    		      <div class="modal-content">
-    		         <div class="modal-header">
+   </form>
+       <div class="modal fade login" id="loginModal">
+            <div class="modal-dialog login animated">
+                <div class="modal-content">
+                   <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title">Login with</h4>
                     </div>
@@ -143,9 +143,9 @@
                              <a href="<%=ctxPath%>/member/LoginAction2.com">Login</a>
                         </div>
                     </div>
-    		      </div>
-		      </div>
-		  </div>
+                </div>
+            </div>
+        </div>
     </div>
     
 <!--  -->
