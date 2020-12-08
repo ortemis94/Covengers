@@ -20,7 +20,6 @@ public class ProductDisplayAction extends AbstractController {
       
       
       super.header(request);
-      String method = request.getMethod();
       
       String category = request.getParameter("categorycode") == null ? "101": request.getParameter("categorycode");
       

@@ -28,7 +28,7 @@ div#menu {
 
 div#miniContainer {
    /*      border: solid 1px red;  */
-   width: 700px;
+   width: 1000px;
    margin: 0 auto;
    text-align: center;
    display: inline-block;
@@ -157,12 +157,15 @@ div#menu>ul {
                </tr>
             </thead>
             <tbody>
-               <tr>
-                  <td colspan="5" style="padding: 20px; font-size: 35px; font-weight: bold; color: gray;" align="left">${week[0]}</td>
-               </tr>
+               <c:if test="${check[0] eq 1}">
+                  <tr>
+                     <td colspan="5" style="padding: 20px; font-size: 35px; font-weight: bold; color: gray;" align="left">${week[0]}</td>
+                  </tr>
+               
+               </c:if>
                <c:forEach items="${purchaseList}" var="purchase"
                   varStatus="status">
-                  <c:if test="${purchase.paymentdate eq 0}">
+                  <c:if test="${purchase.paymentcheck eq 0}">
                      <tr style="border-bottom: solid 1px gray; padding-top: 20px;">
                         <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.paymentno}</span></td>
                         <td style="padding: 20px;">
@@ -189,12 +192,15 @@ div#menu>ul {
                      </tr>
                   </c:if>
                </c:forEach>
-               <tr>
-                  <td colspan="5" style="padding: 20px; font-size: 35px; font-weight: bold; color: gray;"" align="left">${week[1]}</td>
-               </tr>
+               <c:if test="${check[1] eq 1}">
+                  <tr>
+                     <td colspan="5" style="padding: 20px; font-size: 35px; font-weight: bold; color: gray;" align="left">${week[1]}</td>
+                  </tr>
+               
+               </c:if>
                <c:forEach items="${purchaseList}" var="purchase"
                   varStatus="status">
-                  <c:if test="${purchase.paymentdate eq 1}">
+                  <c:if test="${purchase.paymentcheck eq 1}">
                      
                      <tr style="border-bottom: solid 1px gray; padding-top: 20px;">
                      <td style="padding: 20px;"><span  style="font-size: 20px; font-weight: bold;" >${purchase.paymentno}</span></td>
@@ -203,7 +209,7 @@ div#menu>ul {
                            height="200px""></td>
                         <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.krproductname}</span></td>
                         <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.optionname}</span></td>
-                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.orderqty}</span></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.orderqty}개</span></td>
 
                         <c:if test="${purchase.reviewstatus eq 0 }">
                            <td style="padding: 20px;">
@@ -223,12 +229,15 @@ div#menu>ul {
                   </c:if>
                </c:forEach>
 
-               <tr>
-                  <td colspan="5" style="padding: 20px; font-size: 35px; font-weight: bold; color: gray;"" align="left">${week[2]}</td>
-               </tr>
+               <c:if test="${check[2] eq 1}">
+                  <tr>
+                     <td colspan="5" style="padding: 20px; font-size: 35px; font-weight: bold; color: gray;" align="left">${week[2]}</td>
+                  </tr>
+               
+               </c:if>
                <c:forEach items="${purchaseList}" var="purchase"
                   varStatus="status">
-                  <c:if test="${purchase.paymentdate eq 2}">
+                  <c:if test="${purchase.paymentcheck eq 2}">
                      
                      <tr style="border-bottom: solid 1px gray; padding-top: 20px;">
                         <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.paymentno}</span></td>
@@ -237,7 +246,7 @@ div#menu>ul {
                            height="200px""></td>
                         <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.krproductname}</span></td>
                         <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.optionname}</span></td>
-                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.orderqty}</span></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.orderqty}개</span></td>
 
                         <c:if test="${purchase.reviewstatus eq 0 }">
                            <td style="padding: 20px;">
@@ -255,12 +264,15 @@ div#menu>ul {
                      </tr>
                   </c:if>
                </c:forEach>
-               <tr>
-                  <td colspan="5" style="padding: 20px; font-size: 35px; font-weight: bold; color: gray;"" align="left">${week[3]}</td>
-               </tr>
+               <c:if test="${check[3] eq 1}">
+                  <tr>
+                     <td colspan="5" style="padding: 20px; font-size: 35px; font-weight: bold; color: gray;" align="left">${week[3]}</td>
+                  </tr>
+               
+               </c:if>
                <c:forEach items="${purchaseList}" var="purchase"
                   varStatus="status">
-                  <c:if test="${purchase.paymentdate eq 3}">
+                  <c:if test="${purchase.paymentcheck eq 3}">
                      
                      <tr style="border-bottom: solid 1px gray; padding-top: 20px;">
                         <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.paymentno}</span></td>
@@ -269,7 +281,7 @@ div#menu>ul {
                            height="200px""></td>
                         <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.krproductname}</span></td>
                         <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.optionname}</span></td>
-                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.orderqty}</span></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.orderqty}개</span></td>
 
                         <c:if test="${purchase.reviewstatus eq 0 }">
                            <td style="padding: 20px;">
@@ -288,12 +300,15 @@ div#menu>ul {
                      </tr>
                   </c:if>
                </c:forEach>
-               <tr>
-                  <td colspan="5" style="padding: 20px; font-size: 35px; font-weight: bold; color: gray;"" align="left">${week[4]}</td>
-               </tr>
+               <c:if test="${check[4] eq 1}">
+                  <tr>
+                     <td colspan="5" style="padding: 20px; font-size: 35px; font-weight: bold; color: gray;" align="left">${week[4]}</td>
+                  </tr>
+               
+               </c:if>
                <c:forEach items="${purchaseList}" var="purchase"
                   varStatus="status">
-                  <c:if test="${purchase.paymentdate eq 4}">
+                  <c:if test="${purchase.paymentcheck eq 4}">
                      
                      <tr style="border-bottom: solid 1px gray; padding-top: 20px;">
                         <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.paymentno}</span></td>
@@ -302,7 +317,7 @@ div#menu>ul {
                            height="200px""></td>
                         <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.krproductname}</span></td>
                         <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.optionname}</span></td>
-                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.orderqty}</span></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.orderqty}개</span></td>
 
                         <c:if test="${purchase.reviewstatus eq 0 }">
                            <td style="padding: 20px;">
@@ -320,12 +335,15 @@ div#menu>ul {
                      </tr>
                   </c:if>
                </c:forEach>
-               <tr>
-                  <td colspan="5" style="padding: 20px; font-size: 35px; font-weight: bold; color: gray;"" align="left">${week[5]}</td>
-               </tr>
+              <c:if test="${check[5] eq 1}">
+                  <tr>
+                     <td colspan="5" style="padding: 20px; font-size: 35px; font-weight: bold; color: gray;" align="left">${week[5]}</td>
+                  </tr>
+               
+               </c:if>
                <c:forEach items="${purchaseList}" var="purchase"
                   varStatus="status">
-                  <c:if test="${purchase.paymentdate eq 5}">
+                  <c:if test="${purchase.paymentcheck eq 5}">
                      
                      <tr style="border-bottom: solid 1px gray; padding-top: 20px;">
                         <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.paymentno}</span></td>
@@ -334,7 +352,7 @@ div#menu>ul {
                            height="200px""></td>
                         <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.krproductname}</span></td>
                         <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.optionname}</span></td>
-                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.orderqty}</span></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.orderqty}개</span></td>
 
                         <c:if test="${purchase.reviewstatus eq 0 }">
                            <td style="padding: 20px;">
@@ -352,12 +370,15 @@ div#menu>ul {
                      </tr>
                   </c:if>
                </c:forEach>
-               <tr>
-                  <td colspan="5" style="padding: 20px; font-size: 35px; font-weight: bold; color: gray;"" align="left">${week[6]}</td>
-               </tr>
+               <c:if test="${check[6] eq 1}">
+                  <tr>
+                     <td colspan="5" style="padding: 20px; font-size: 35px; font-weight: bold; color: gray;" align="left">${week[6]}</td>
+                  </tr>
+               
+               </c:if>
                <c:forEach items="${purchaseList}" var="purchase"
                   varStatus="status">
-                  <c:if test="${purchase.paymentdate eq 6}">
+                  <c:if test="${purchase.paymentcheck eq 6}">
                      
                      <tr style="border-bottom: solid 1px gray; padding-top: 20px;">
                         <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.paymentno}</span></td>
@@ -366,7 +387,7 @@ div#menu>ul {
                            height="200px""></td>
                         <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.krproductname}</span></td>
                         <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.optionname}</span></td>
-                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.orderqty}</span></td>
+                        <td style="padding: 20px;"><span style="font-size: 20px; font-weight: bold;">${purchase.orderqty}개</span></td>
 
                         <c:if test="${purchase.reviewstatus eq 0 }">
                            <td style="padding: 20px;">
@@ -389,14 +410,7 @@ div#menu>ul {
             </tbody>
          </table>
       </c:if>
-
-
-
-
    </div>
-
-
-
 </div>
 
 <form name="reviewForm">

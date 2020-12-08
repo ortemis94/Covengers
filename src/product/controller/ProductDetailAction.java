@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import common.controller.AbstractController;
-
+import my.util.MyUtil;
 import product.model.*;
 
 public class ProductDetailAction extends AbstractController {
@@ -17,8 +17,6 @@ public class ProductDetailAction extends AbstractController {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		super.header(request);
 		HttpSession session = request.getSession();
-		
-		String method = request.getMethod();
 		
 		String productcode = "";
 		
@@ -51,6 +49,9 @@ public class ProductDetailAction extends AbstractController {
 			viewPage = request.getContextPath() + "/product/productDisplay.com";
 			
 		} else {  // 상품이 데이터베이스 내부에서 조회가 되었을 경우
+			
+			String currentURL = MyUtil.getCurrentURL(request);
+	        session.setAttribute("currentURL", currentURL);
 			
 			// 리뷰 테이블에서 리뷰정보를 가져와야 함!!
 			

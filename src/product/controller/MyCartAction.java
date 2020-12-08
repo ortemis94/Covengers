@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import common.controller.AbstractController;
 import member.model.MemberVO;
+import my.util.MyUtil;
 import product.model.*;
 
 public class MyCartAction extends AbstractController {
@@ -29,9 +30,17 @@ public class MyCartAction extends AbstractController {
 		// 조건 자체를 로그인이 되어있는지 안되어 있는지 확인한후 로그인이 되어있으면 로그인한 회원과 들어온 회원이 일치하는지 확인도 해야함
 		// 그렇게 하고 난후 로그인 한 회원과 조회하는 회원이 일치한다면 페이지를 띄워주어야 한다.
 		if (loginuser == null) {
+
+			String currentURL = MyUtil.getCurrentURL(request);
+	        session.setAttribute("currentURL", currentURL);
+			
 			super.setRedirect(false);
 			super.setViewPage("/WEB-INF/myPage/myPage_emptyCart.jsp");
 		}else {
+			
+			String currentURL = MyUtil.getCurrentURL(request);
+	        session.setAttribute("currentURL", currentURL);
+			
 			session.setAttribute("userno", loginuser.getUserno());
 			
 		    InterCartDAO cdao = new CartDAO();

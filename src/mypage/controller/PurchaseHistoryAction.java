@@ -64,7 +64,38 @@ public class PurchaseHistoryAction extends AbstractController {
          week.add(prev5);
          week.add(prev6);
          
+         int[] check = {0, 0, 0, 0, 0, 0, 0};
          
+         for (Map<String, String> purchase : purchaseList) {
+            switch (purchase.get("paymentcheck")) {
+         case "0":
+            check[0] = 1;
+            break;
+         case "1":
+            check[1] = 1;
+            break;
+         case "2":
+            check[2] = 1;
+            break;
+         case "3":
+            check[3] = 1;
+            break;
+         case "4":
+            check[4] = 1;
+            break;
+         case "5":
+            check[5] = 1;
+            break;
+         case "6":
+            check[6] = 1;
+            break;
+         
+         }
+            
+            purchase.get("paymentcheck");
+         }
+         
+         request.setAttribute("check", check);
          request.setAttribute("week", week);
          request.setAttribute("purchaseList", purchaseList);
 

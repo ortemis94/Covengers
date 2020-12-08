@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import board.model.*;
 import common.controller.AbstractController;
 import member.model.MemberVO;
+import my.util.MyUtil;
 
 public class QnaDetailAction extends AbstractController {
 
@@ -24,6 +25,9 @@ public class QnaDetailAction extends AbstractController {
 			
 			String message = "로그인하셔야 합니다.";
 			String loc = "javascript:history.back();";
+			
+			String currentURL = MyUtil.getCurrentURL(request);
+			session.setAttribute("currentURL", currentURL);
 			
 			request.setAttribute("message", message);
 			request.setAttribute("loc", loc);

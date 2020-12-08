@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import my.util.MyUtil;
 import product.model.InterProductDAO;
 import product.model.ProductDAO;
 import product.model.ProductVO;
@@ -31,6 +33,10 @@ public class CovengersAssemble extends AbstractController {
 		
 		request.setAttribute("plist", plist);
 		request.setAttribute("categoryInfo", categoryInfo);
+		
+		HttpSession session = request.getSession();
+        String currentURL = MyUtil.getCurrentURL(request);
+        session.setAttribute("currentURL", currentURL);
 		
 		super.setRedirect(false);
 		super.setViewPage("/WEB-INF/covengers_assemble.jsp");

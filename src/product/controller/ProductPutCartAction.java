@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import common.controller.AbstractController;
 import member.model.MemberVO;
+import my.util.MyUtil;
 import product.model.*;
 
 public class ProductPutCartAction extends AbstractController {
@@ -70,6 +71,9 @@ public class ProductPutCartAction extends AbstractController {
 			// 로그인이 필요합니다라는 말을 띄운후 이전페이지로 돌려보내준다.
 			message = "로그인이 필요합니다.";
 			loc="javascript:history.back()";
+			
+			String currentURL = MyUtil.getCurrentURL(request);
+	        session.setAttribute("currentURL", currentURL);
 			
 			request.setAttribute("message", message);
 			request.setAttribute("loc", loc);

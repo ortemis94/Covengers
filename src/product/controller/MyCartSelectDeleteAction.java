@@ -24,7 +24,9 @@ public class MyCartSelectDeleteAction extends AbstractController {
 			super.setRedirect(true);
 			super.setViewPage(request.getContextPath() + "main.com");
 		}else {
-				
+			
+			
+			
 			String scartno = request.getParameter("scartno");
 			
 			String[] arrcartno = scartno.split(",");

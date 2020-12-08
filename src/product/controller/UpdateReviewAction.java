@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import common.controller.AbstractController;
 import member.model.MemberVO;
+import my.util.MyUtil;
 import product.model.InterProductDAO;
 import product.model.ProductDAO;
 import product.model.ProductVO;
@@ -74,6 +75,9 @@ public class UpdateReviewAction extends AbstractController {
          String message = "로그인이 필요합니당";
          String loc = "javascript:history.back()";
 
+         String currentURL = MyUtil.getCurrentURL(request);
+	     session.setAttribute("currentURL", currentURL);
+         
          request.setAttribute("message", message);
          request.setAttribute("loc", loc);
 

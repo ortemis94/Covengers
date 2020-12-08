@@ -9,28 +9,27 @@ import javax.servlet.http.HttpSession;
 import board.model.*;
 import common.controller.AbstractController;
 import member.model.MemberVO;
+import my.util.MyUtil;
 
 public class FaqAction extends AbstractController {
 
    @Override
    public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 	   super.header(request);
-	//   super.header(request);
-//	  HttpSession session = request.getSession();
-//	  MemberVO loginuser = (MemberVO)session.getAttribute("loginuser");
-/*
-      MemberVO loginuser = (MemberVO)session.setAttribute("loginuser", loginuser);
-      int loginStatus = 3;
-	  int loginStatus = loginuser.getStatus();
-*/
-      InterBoardDAO bdao = new BoardDAO();
-      List<FaqVO> faqList = bdao.selectFaqList();
+
+	   HttpSession session = request.getSession();
+	   String currentURL = MyUtil.getCurrentURL(request);
+	   session.setAttribute("currentURL", currentURL);
+	   
+	   InterBoardDAO bdao = new BoardDAO();
+       List<FaqVO> faqList = bdao.selectFaqList();
       
-      request.setAttribute("faqList", faqList);
- //   request.setAttribute("loginStatus", loginStatus);
       
-      super.setRedirect(false);
-      super.setViewPage("/WEB-INF/board/faq.jsp");
+       request.setAttribute("faqList", faqList);
+  //   request.setAttribute("loginStatus", loginStatus);
+      
+       super.setRedirect(false);
+       super.setViewPage("/WEB-INF/board/faq.jsp");
       
    }
 

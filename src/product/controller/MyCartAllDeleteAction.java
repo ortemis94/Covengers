@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import common.controller.AbstractController;
 import member.model.MemberVO;
+import my.util.MyUtil;
 import product.model.*;
 
 public class MyCartAllDeleteAction extends AbstractController {
@@ -40,7 +41,6 @@ public class MyCartAllDeleteAction extends AbstractController {
 				super.setRedirect(true);
 				super.setViewPage(request.getContextPath() + "/product/myCart.com");
 			}
-			
 			
 		}
 		

@@ -17,7 +17,7 @@ public class DeleteAnswerAction extends AbstractController {
 		/*		
  			HttpSession session = request.getSession();
 			MemberVO loginuser = (MemberVO)session.getAttribute("loginuser");
-		*/
+		*/  
 		String method = request.getMethod();
 		
 		if (method.equalsIgnoreCase("get")) {

@@ -171,8 +171,8 @@ public class OrderDAO implements InterOrderDAO {
                "                                             when 3 then 3\n"+
                "                                             when 4 then 4\n"+
                "                                             when 5 then 5\n"+
-               "                                            else  6  end as paymentdate\n"+
-               ", p.productcode, d.reviewstatus, m.paymentno\n"+
+               "                                            else  6  end as paymentcheck\n"+
+               ", p.productcode, d.reviewstatus\n"+
                "from tbl_payment_detail d join \n"+
                "                                ( select paymentno, paymentdate\n"+
                "                                  from tbl_payment\n"+
@@ -199,10 +199,9 @@ public class OrderDAO implements InterOrderDAO {
             purchase.put("krproductname", rs.getString(3));
             purchase.put("optionname", rs.getString(4));
             purchase.put("orderqty", rs.getString(5));
-            purchase.put("paymentdate", rs.getString(6));
+            purchase.put("paymentcheck", rs.getString(6));
             purchase.put("productcode", rs.getString(7));
             purchase.put("reviewstatus", rs.getString(8));
-            purchase.put("paymentno", rs.getString(9));
             
             purchaseList.add(purchase);
             
