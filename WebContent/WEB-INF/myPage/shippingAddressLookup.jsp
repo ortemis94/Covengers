@@ -94,6 +94,7 @@
    div#container1 {
       font-family: "Open Sans", sans-serif;
       padding-top: 100px;
+      padding-bottom: 200px;
    }
    
    label {
@@ -194,7 +195,7 @@
    <div id="miniContainer">
          <h1>배송지 관리</h1>
            <hr style="border: solid 1px gray;">
-      </div>
+   </div>
 </div>
     
     <div id="container1">

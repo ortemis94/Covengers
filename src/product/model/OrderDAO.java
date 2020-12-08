@@ -65,17 +65,25 @@ public class OrderDAO implements InterOrderDAO {
    public List<OrderVO> selectDetailList(String fk_userno) throws SQLException {
 
       List<OrderVO> orderList = new ArrayList<>();
+      
+      int total = 0;
 
       try {
 
          conn = ds.getConnection();
 
-         String sql = " select p.paymentno, p.fk_userno, p.totalprice, to_char(p.paymentdate, 'yyyy-mm-dd hh24:mi:ss') as paymentdate, "
-               + "         p.fk_shippingno, d.pdetailno, d.fk_optioncode, t.krproductname, o.optionname, t.price as price, d.orderqty as orderqty "
-               + " from tbl_payment p " + " join tbl_payment_detail d " + " on p.paymentno = fk_paymentno "
-               + " join tbl_option o " + " on o.optioncode = d.fk_optioncode " + " join tbl_product t "
-               + " on t.productcode = o.fk_productcode " + " where p.fk_userno = ?  and d.delstatus = 0 "
-               + " order by paymentdate desc ";
+         String sql = " select p.paymentno, p.fk_userno, p.totalprice, to_char(p.paymentdate, 'yyyy-mm-dd hh24:mi:ss') as paymentdate, " +
+             "         p.fk_shippingno, d.pdetailno, d.fk_optioncode, t.krproductname, o.optionname, t.price as price, d.orderqty as orderqty, t.productimg1 as productimg, d.delstatus " +
+             " from tbl_payment p " +
+             " join tbl_payment_detail d " +
+             " on p.paymentno = fk_paymentno " +
+             " join tbl_option o " +
+             " on o.optioncode = d.fk_optioncode " +
+             " join tbl_product t " +
+             " on t.productcode = o.fk_productcode " +
+             " where p.fk_userno = ? " +
+             " order by paymentdate desc " ;
+             
 
          pstmt = conn.prepareStatement(sql);
          pstmt.setString(1, fk_userno);
@@ -84,10 +92,12 @@ public class OrderDAO implements InterOrderDAO {
 
          while (rs.next()) {
             OrderVO order = new OrderVO();
-
+            
+            total = rs.getInt(3);
+            
             order.setO_paymentno(rs.getInt(1));
             order.setO_fk_userno(rs.getString(2));
-            order.setO_totalprice(rs.getString(3));
+            order.setO_totalprice(total);
             order.setO_paymentdate(rs.getString(4));
             order.setO_fk_shippingno(rs.getInt(5));
             order.setO_pdetailno(rs.getInt(6));
@@ -96,8 +106,11 @@ public class OrderDAO implements InterOrderDAO {
             order.setO_optionname(rs.getString(9));
             order.setO_price(rs.getInt(10));
             order.setO_orderqty(rs.getInt(11));
-
+            order.setO_productimg(rs.getString(12));
+            order.setO_delstatus(rs.getInt(13));
+            
             orderList.add(order);
+            
 
          }
 
@@ -137,7 +150,7 @@ public class OrderDAO implements InterOrderDAO {
             order.setPaymentno(rs.getInt(1));
             order.setUserno(rs.getString(2));
             order.setPaymentdate(rs.getString(3));
-            order.setTotalprice(rs.getInt(4));
+            order.setTotalprice(rs.getString(4));
             order.setShippingno(rs.getInt(5));
             order.setPdetailno(rs.getInt(6));
             order.setOrderqty(rs.getInt(7));
@@ -213,5 +226,4 @@ public class OrderDAO implements InterOrderDAO {
       
       return purchaseList;
    }
-
 }

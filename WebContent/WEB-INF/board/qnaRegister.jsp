@@ -137,41 +137,6 @@
 			   	<hr style="border: solid 1px gray;">	
 			</div>
 			<div id="reset" class="form-group">
-				
-				<%-- <form name="questionFrm">
-					"<span style="color: #cc66ff;">${name}</span>"님의 문의입니다. <br>
-					제목: <input id="subject" name="subject" type="text" /> &nbsp;&nbsp;&nbsp;&nbsp;
-					
-					문의유형:
-					<select id="category" name="category">
-						<c:forEach var="category" items="${cateList}">
-							<option>
-								<c:choose>
-									<c:when test="${category eq 'GOODS'}">
-										상품
-									</c:when>
-									<c:when test="${category eq 'DELIVERY'}">
-										배송
-									</c:when>
-									<c:when test="${category eq 'PAYMENT'}">
-										결제
-									</c:when>
-									<c:otherwise>
-										기타
-									</c:otherwise>
-								</c:choose>
-							</option>
-						</c:forEach>
-					</select>
-					<br>
-					<input name="userno" type="hidden" value="${userno}" />
-					<input name="username" type="hidden" value="${name}" />
-					
-					문의 내용: <br>
-					<textarea id="content" name="content" cols="40" rows="8"></textarea>
-					
-				</form> --%>
-
 				<form name="questionFrm">
 					<ul>
 						<li>

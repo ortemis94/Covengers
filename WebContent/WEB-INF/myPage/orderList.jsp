@@ -26,7 +26,7 @@
    }
       
    div#miniContainer {
-      width: 700px;
+      width: 70%;
       margin: 0 auto;
       text-align: center;
       display: inline-block;
@@ -82,7 +82,7 @@
       <div id="miniContainer">
       <h1>주문내역</h1>
         <hr style="border: solid 1px gray;">
-        
+        <!-- 
         <c:forEach var="order" items="${orderList}">
         ${order.o_paymentno}<br>
         ${order.o_fk_userno}<br>
@@ -96,8 +96,43 @@
         ${order.o_optionname}<br>
         ${order.o_price}<br>
         ${order.o_orderqty}<br>
+        ${order.o_delstatus}<br>
         <br>
         </c:forEach>
+         -->
+        
+        <div id="productInfo" style="width: 100%; clear: both; margin-top: 50px;">
+          
+            <table style="width: 100%;">
+                  
+               <thead>
+                  <tr>
+                  </tr>
+               </thead>
+               <tbody>
+                  <c:if test="${not empty orderList}">
+                     <c:forEach items="${orderList}" var="order" varStatus="status">
+                        <tr style="border-bottom: solid 1px gray; padding-top: 20px;">
+                           <td style="padding: 10px;"><img src="/Covengers/images/${order.o_productimg}" width="120px" height="200px""></td>
+                           <td style="padding: 10px;"><span>${order.o_krproductname}</span></td>
+                           <td style="padding: 10px;"><span><fmt:formatNumber type="number" maxFractionDigits="3" value="${order.o_price}"/>원</span></td>
+                           <td style="padding: 10px;"><span>${order.o_optionname}&emsp;외&emsp;${order.o_orderqty}&ensp;개</span></td>
+                           <td style="padding: 10px;"><span>총&emsp;<fmt:formatNumber type="number" maxFractionDigits="3" value="${order.o_totalprice}"/>원</span></td>
+                           <td style="padding: 10px;">
+                           	<c:if test="${order.o_delstatus eq 2}">
+                           		<span>배송 완료</span>
+                           </c:if>
+                           	<c:if test="${order.o_delstatus ne 2}">
+                           		<span>배송 중</span>
+                           </c:if></td>
+                           
+                        </tr>
+                     </c:forEach>
+                  
+                  </c:if>
+               </tbody>
+            </table>
+         </div>
         
         
       </div>

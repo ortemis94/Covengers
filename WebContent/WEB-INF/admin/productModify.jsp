@@ -98,7 +98,7 @@
    
    <hr style ="border: 2px solid black; background-color: black;">
 
-   <div class="panel-group" id="accordion">
+   <div class="panel-group" id="accordion" style="padding-bottom: 100px;">
 
       <jsp:include page="productModify2.jsp"></jsp:include>
       

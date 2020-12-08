@@ -14,6 +14,7 @@
       width: 1200px;
       margin: 30px auto;
       text-align: center; 
+      padding-bottom: 100px;
     }
    
    div#miniContainer {

@@ -23,7 +23,7 @@
 
 </script>
 
-	<div id="container">
+	<div id="container" style="padding-bottom: 100px;">
 		<h1>리 뷰</h1>
       	<hr style="border: solid 1px gray;">
 		

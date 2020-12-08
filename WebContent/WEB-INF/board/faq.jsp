@@ -14,6 +14,7 @@
       margin: 30px auto;
       padding-bottom: 200px;
       text-align: center; 
+      padding-bottom: 100px;
     }
    
    div#miniContainer {
