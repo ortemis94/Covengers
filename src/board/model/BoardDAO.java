@@ -154,7 +154,6 @@ public class BoardDAO implements InterBoardDAO {
 		int result = 0;
 		
 		try {
-			
 			conn = ds.getConnection();
 			
 			String sql = "UPDATE tbl_faq_test SET faqquestion = ?, faqanswer = ?, faqadminno = ? "+
@@ -176,7 +175,7 @@ public class BoardDAO implements InterBoardDAO {
 	}// end of public int updateFaq(FaqVO fvo) throws SQLException {}-----------------------------------------
 
 
-	// 요청한 faqNo를 가진 게시물을 삭제해주는 메서드
+	// 요청한 faqNo를 가진 게시물을 삭제.
 	@Override
 	public int deleteFaq(String requestFaqNo) throws SQLException {
 		
@@ -203,18 +202,15 @@ public class BoardDAO implements InterBoardDAO {
 	}// end of public int deleteFaq(String requestFaqNo) throws SQLException {}-------------------------------
 
 
-	// 모든 FAQ 게시물을 삭제해주는 메서드
+	// 모든 FAQ 게시물을 삭제.
 	@Override
 	public int deleteAllFaq() throws SQLException {
 		
 		int result = 0;
-		
 		try {
 			
 			conn = ds.getConnection();
-			
 			String sql = "DELETE FROM tbl_faq_test";
-			
 			pstmt = conn.prepareStatement(sql);
 			
 			result = pstmt.executeUpdate();
@@ -364,7 +360,6 @@ public class BoardDAO implements InterBoardDAO {
 	public List<QnaQuestionVO> selectQnaList(String currentShowPageNo) throws SQLException {
 
 		List<QnaQuestionVO> questionList = new ArrayList<>();
-		
 		try {
 			
 			conn = ds.getConnection();
@@ -521,7 +516,7 @@ public class BoardDAO implements InterBoardDAO {
 	}// end of public QnaAnswerVO selectAnswer(String selectNo) throws SQLException {}-------------------------
 
 
-	// 입력받은 값들을 tbl_qnaquestion_test2에서 수정(update)하는 메서드 
+	// QnA 질문을 수정(update) 
 	@Override
 	public int updateQnaQuestion(QnaQuestionVO bvo) throws SQLException {
 
@@ -548,21 +543,18 @@ public class BoardDAO implements InterBoardDAO {
 	}// end of public int updateQnaQuestion(QnaQuestionVO bvo) throws SQLException {}--------------------------------
 	
 	
-	// 회원이 요청한 게시물을 삭제(delete)해주는 메서드
+	// 회원이 요청한 게시물을 삭제(delete)
 	@Override
 	public int deleteQuestion(String qnaNo) throws SQLException {
 		
 		int result = 0;
-		
 		try {
 			conn = ds.getConnection();
 			
 			String sql = "DELETE FROM tbl_qnaquestion_test2\n"+
 					"WHERE qnaNo = ?";
-			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, Integer.parseInt(qnaNo));
-			
 			result = pstmt.executeUpdate();
 		} finally {
 			close();
@@ -598,7 +590,7 @@ public class BoardDAO implements InterBoardDAO {
 	}// end of public int registerAnswer(QnaAnswerVO qavo) throws SQLException {}-------------------------
 		
 		
-	// 게시물 번호와 답변 내용을 가지고 수정(update)해주는 메서드
+	// QnA 답변내용 수정(update)
 	@Override
 	public int updateAnswer(QnaAnswerVO qavo) throws SQLException {
 		
@@ -623,7 +615,7 @@ public class BoardDAO implements InterBoardDAO {
 	}// end of public int updateAnswer(QnaAnswerVO qavo) throws SQLException {|------------------------------
 	
 	
-	// 답변 게시물 번호로 답변 게시물을 삭제(delete)하는 메서드
+	// 답변 게시물 번호로 답변을 삭제(delete)
 	@Override
 	public int deleteAnswer(String qnaNo) throws SQLException {
 

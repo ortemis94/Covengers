@@ -50,13 +50,6 @@
 
 	$(document).ready(function() {
 		
-		/* // 넘어온 fvo가 빈값이 아니라면 각 항목에 값을 넣어준다.
-		if ("${fvo}" != null) {
-			$("input[name=question]").val("${fvo.faqQuestion}");
-			$("textarea[name=answer]").val("${fvo.faqAnswer}");
-			$("input[name=faqNo]").val("${fvo.faqNo}");
-		}
-		 */
 		// 처음 들어왔을 때엔 경고창을 보여주지 않는다.
 		$("span#questionAlert").hide();
 		$("span#answerAlert").hide();

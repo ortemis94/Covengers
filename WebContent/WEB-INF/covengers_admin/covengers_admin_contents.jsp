@@ -460,23 +460,6 @@
 	var ctx = document.getElementById("amountByCategory");
 	var label = new Array();
 	var data = new Array();
-	/* $.each(${infoList}, function(index, item){
-		label.push(item.krcategoryname);
-		data.push(item.countPerCategory);
-	}); */
-	
-	/* ${infoList}.each(function(index, item){
-		label.push(item.krcategoryname);
-		data.push(item.countPerCategory);
-	}) */
-	
-/* 
-	<c:forEach var='info' items='${infoList}' varStatus='status'>
-		label.push('${info.payday}');
-		data.push('${info.sumOrderQty}');
-		weekTotalCount += Number("${info.sumOrderQty}");
-	</c:forEach>
- */	
  	var weekTotalCount = 0;
 	var flag;	
  	var payday = "";

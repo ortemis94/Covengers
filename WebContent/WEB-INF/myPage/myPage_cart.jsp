@@ -195,7 +195,7 @@
 
       });// end of $("button#goBack").click(function() {});----------------------
 
-      // === 전체 선택/해제 체크박스를 클릭했을 때, 전체 선택/해제 체크박스가 체크되었다면 모든 체크박스를 체크하고 전체 선택/해제 체크박스가 해제되었다면 모든 체크박스를 해제함.  
+      // === 전체 선택/해제 체크박스를 클릭했을 때, 해당 체크박스의 체크 여부에 맞게 모든 체크박스의 상태를 바꿈.
       $("input#allCheck").click(function () {
     	  
          var bCheckboxState = $("input#allCheck").prop("checked");
@@ -205,11 +205,8 @@
          } else {
             $("input.individualCheck").prop("checked", false);
          }
-         
          calSumPrice();
-         
       });// end of $("input#allCheck").click(function() {});--------------------------------
-
 
       // === 하위 체크박스에 체크가 1개라도 체크가 해제되면 체크박스 전체선택/전체해제 체크박스도 체크가 해제되고
       //     하위 체크박스에 체크가 모두 체크가 되어지지면  체크박스 전체선택/전체해제 체크박스도 체크가 되어지도록 함.=
@@ -220,7 +217,8 @@
             // 클릭한 체크박스가 해제된 상태라면 전체 선택/해제 체크박스를 해제 시킴.
             $("input#allCheck").prop("checked", false);
          } else {
-            // 클릭한 체크박스가 체크된 상태라면 모든 개별 체크박스를 확인하고 모두 체크된 상태일 때, 전체 선택/해제 체크박스를 체크 시킴.
+            // 클릭한 체크박스가 체크된 상태라면 모든 개별 체크박스를 확인하고 모두 체크된 상태일 때, 
+            // 전체 선택/해제 체크박스를 체크 시킴.
             var flag = true;
             $("input.individualCheck").each(function () {
                if (!($(this).prop("checked"))) {
@@ -231,9 +229,7 @@
             if (flag) {
                $("input#allCheck").prop("checked", true);
             }
-
          }// end of if (!bCheckboxState) {}else{}------------------------------------------
-
       });// end of $("input.individualCheck").click(function() {});-------------------------
 
 
@@ -250,17 +246,11 @@
          var pPrice = Number($(this).parent().find($("span.pPrice")).text());
          var poqty = $(this).val();
 
-         console.log("di : " + (iPrice * poqty));
-         console.log($(this).siblings("input.itotalPrice").val() );
-
          // hidden input 태그에 합계 가격을 집어 넣음.
          $(this).siblings("input.itotalPrice").val(iPrice * poqty);
-         
          var totalPrice = $(this).siblings("input.itotalPrice").val();
          
-
          $(this).parent().find($("span.totalPrice")).text("￦"+comma(totalPrice));
-         
 
          calSumPrice();
 
@@ -284,8 +274,6 @@
          $(this).siblings("input.itotalPrice").val(iPrice * poqty);
          
          var totalPrice = $(this).siblings("input.itotalPrice").val();
-         
-
          $(this).parent().find($("span.totalPrice")).text("￦"+comma(totalPrice));
          
     	 
@@ -304,23 +292,16 @@
                $(this).val(1);
             }
         
-        //  var pPrice = $(this).parent().find($("input.ipPrice")).val();
             var pPrice = Number($(this).parent().find($("span.pPrice")).text());
             var poqty = $(this).val();
 
-         // hidden input 태그에 합계 가격을 집어 넣음.
             $(this).siblings("input.itotalPrice").val(iPrice * poqty);
             
             var totalPrice = $(this).siblings("input.itotalPrice").val();
-            
-
             $(this).parent().find($("span.totalPrice")).text("￦"+comma(totalPrice));
-            
 
             calSumPrice();
          }
-
-
       });// end of $("input.poqty").blur(function() {});-------------------------------------
 
       
@@ -348,9 +329,7 @@
       
       // === "전체삭제" 버튼을 누르면 해당 회원의 모든 장바구니 데이터를 삭제하도록 함.
       $("button#allDelete").click(function () {
-
          location.href = "<%= ctxPath%>/product/myCartAllDelete.com";
-
       });// end of $("button#allDelete").click(function() {});------------------------------
 
       
@@ -360,15 +339,11 @@
          var arrcartno = [];
 
          $("input.individualCheck").each(function (index, item) {
-
             if ($(this).prop("checked")) {
-               //  console.log($(this).parent().find($("input.cartno")).val()); // $("div#container").find(".baseball")
                arrcartno.push($(this).parent().find($("input.cartno")).val());
             }
-
          });
          var scartno = arrcartno.join(',');
-      //   console.log(scartno);
 
          $.ajax({
             url: "<%= ctxPath%>/product/myCartSelectDelete.com",
@@ -377,7 +352,6 @@
          });
 
          location.reload();
-
       });
 
       // === "삭제" 버튼을 누르면 테이블에서 삭제
@@ -390,9 +364,7 @@
             data: { "cartno": cartno },
             type: "post"
          });
-
          location.reload();
-
       });
 
 
@@ -402,12 +374,10 @@
     	 if ($("input:checkbox[class=individualCheck]:checked").length == 0) {
 	         alert("구매하실 상품을 체크해주세요!!");
     	 }else{
-			
     		 var poqty = 0;
     		 var cartno = 0;
     		 // 모든 상품의 수량 상태를 DB상으로 update한다. 
         	 $("div.item").each(function() {
-
         		 poqty = $(this).find($("input.poqty")).val();
                  cartno = $(this).find($("input.cartno")).val();
 
@@ -416,7 +386,7 @@
                     data: { "poqty": poqty, "cartno": cartno },
                     type: "post",
                     success:function(){
-	                    	 // 배열 선언
+	                     // 배열 선언
 	               		 var arrcartno = [];
 	               		 var arroption = [];
 	               		 
@@ -430,19 +400,15 @@
 	               	     	if ($(this).prop("checked")) {
 	               	     		
 	               	     		cartno = $(this).parent().find($("input.cartno")).val().trim();
-	               	     		
 	               	     		if (cartno != "") {
 	           	    	     		arrcartno.push(cartno);
 	           					}
 	               	     		
 	               	     		option = $(this).parent().find($("input.optionno")).val().trim();
-	               	     		
 	               	     		if (option != "") {
 	               	     			arroption.push(option);
 	           					}
-	               	     		
 	               	        }
-	           					
 	               	     });
 	               	     
 	               		 // 배열의 모든 요소를 ,구분자로 조인하여 문자열로 만듦
@@ -462,13 +428,9 @@
         	        	alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
         			}
                  });
-
     		 });
-    		 
-    		
-   	
  		 }
-      });
+      });// end of $("button#checkedCardSlash").click(function () {});-----------------------------
       
       
       // === "전체 상품 결제하기" 버튼을 누르면 결제하기 창으로 form을 보내도록 함. 
@@ -478,7 +440,6 @@
     	 $("input.individualCheck").each(function () {
         	  $(this).prop("checked", true);
          });
-    	 
     	 // 전체 품목 합계, 배송비, 총합계를 계산
     	 calSumPrice();
     	  
@@ -486,7 +447,6 @@
  		 var cartno = 0; 
     	 // 모든 상품의 수량 상태를 DB상으로 update한다. 
     	 $("div.item").each(function() {
-
     		 poqty = $(this).find($("input.poqty")).val();
              cartno = $(this).find($("input.cartno")).val();
 
@@ -495,7 +455,6 @@
                 data: { "poqty": poqty, "cartno": cartno },
                 type: "post",
                 success:function(){
-
 	               	 // 배열 선언
 	           		 var arrcartno = [];
 	           		 var arroption = [];
@@ -506,15 +465,12 @@
 	           	         	arrcartno.push($(this).val().trim());
 	           			 }
 	           		 });
-	           		 
 	           		 // 각 상품의 옵션 번호를 배열에 넣음
 	           		 $("input.optionno").each(function() {
 	           			 if ( $(this).val().trim() != "" ) {
 	           			 arroption.push($(this).val().trim());
 	           			 }
 	           		 });
-	           		 
-	           	     
 	           		 // 배열의 모든 요소를 ,구분자로 조인하여 문자열로 만듦
 	           		 var scartno = arrcartno.join(',');
 	           		 var soption = arroption.join(',');
@@ -523,21 +479,19 @@
 	           		 $("input[name=purchasecartno]").val(scartno); 
 	           		 $("input[name=purchaseoption]").val(soption); 
 
-           		 	var frm = document.cartForm;
-               	 	frm.action = "<%= ctxPath%>/payment/cardSlash.com";
-                    frm.method = "post";
-                    frm.submit();
+           		 	 var frm = document.cartForm;
+               	 	 frm.action = "<%= ctxPath%>/payment/cardSlash.com";
+                     frm.method = "post";
+                     frm.submit();
 				},
 				error:function(request, status, error){
 	        		alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
 				}
             });
-
 		 });
-    	 
+      });// end of $("button#cardSlash").click(function () {});---------------------------------
       
-      });
-	  
+      
    });// end of $(document).ready(function() {});--------------------------------------------
 
 
@@ -545,7 +499,6 @@
    // === 만일 전체품목합계액이 50,000원 이하일 때는 배송비가 2500원, 전체품목합계액이 50,000원 이상일 때는 배송비가 0원
    // === 총합계는 전체합계금액과 배송비가 더해진 값이 나오도록 함.
    function calSumPrice() {
-
 	  // 전체품목합계가 있는 span태그 부분에 체크한 모든 상품의 합계 금액을 더한 값이 들어가고
       var sumPrice = 0;
 	  
@@ -556,7 +509,6 @@
       });
 	  
       $("input[name=sumPrice]").val(sumPrice);
-      
       $("span[id=sumPrice]").text(comma(sumPrice));
       
       // 만일 전체품목합계액이 50,000원 이하일 때는 배송비가 2500원, 전체품목합계액이 0원 이거나 50,000원 이상일 때는 배송비가 0원
@@ -565,14 +517,11 @@
       if (sumPrice >= 300000 || sumPrice == 0) {
          deliveryCharge = 0;
       }
-      $("span#deliveryCharge").text(comma(deliveryCharge));
-      
       $("input[name=deliveryCharge]").val(deliveryCharge);
+      $("span#deliveryCharge").text(comma(deliveryCharge));
 
-	  
       // 총합계는 전체합계금액과 배송비가 더해진 값이 나오도록 함.
       $("span#totalCost").text(comma(sumPrice + deliveryCharge));
-      
       $("input[name=totalCost]").val(sumPrice + deliveryCharge);
 
    }// end of function calSumPrice() {}------------------------------------

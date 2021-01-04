@@ -91,7 +91,7 @@ p {
           location.href="<%= ctxPath%>/board/faqRegister.com";
       });
 
-
+      
       // 관리자가 각 게시물의 "수정" 버튼을 누르면 FaqRegisterAction으로 넘어감.
       $("button.editFaq").click(function() {
          
@@ -102,7 +102,6 @@ p {
          var frm = document.requestFrm;
          frm.action = "<%= ctxPath%>/board/faqUpdate.com";
          frm.method = "get";
-         <%-- frm.action = "<%= ctxPath%>/board/faqUpdate.com?requestFaqNo="+faqNo; --%>
          frm.submit();
       });
       
@@ -153,7 +152,7 @@ p {
     <div id="container">
       <div id="miniContainer">
           
-          <h1>F A Q</h1>
+         <h1>F A Q</h1>
          <hr style="border: solid 1px gray;">
    
          <!-- 로그인 유저가 일반 회원이라면  -->

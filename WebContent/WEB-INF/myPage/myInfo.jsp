@@ -52,7 +52,6 @@
 	
 	div#menu > ul {
 		padding: 0;
-/* 		line-height: 30px; */
 		font-size: 12pt;
 	}
 	
@@ -162,7 +161,7 @@
             }
         });
 
-        
+        // 이메일 수정 불가하게 만들기.
         $("input#emailid").click(function name() { // 이메일 입력창을 클릭할 때
         	$("#emailCheck").text("이메일은 수정할 수 없습니다.");
         	$("#emailCheck").show();
@@ -172,30 +171,7 @@
         	$("#emailCheck").hide();
 		});
         
-        /* 
-            $("input#prePassword").blur(function () {
-            var pwd = $(this).val().trim();
-
-            if (pwd == "") {
-                $(this).next().text("비밀번호를 입력해주세요.");
-                $(this).next().show();
-            } else {
-                var regExp = new RegExp(/^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).*$/g);
-                // 숫자/문자/특수문자/ 포함 형태의 8~15자리 이내의 암호 정규표현식 객체 생성
-
-                var bool = regExp.test(pwd);
-
-                if (!bool) {
-                    $(this).next().text("비밀번호는 영문자,숫자,특수기호가 혼합된 8~15 글자로 입력하세요.");
-                    $(this).next().show();
-                } else {
-                    $(this).next().hide();
-                }
-            }
-        });
-        */
-        
-
+		// 비밀번호 유효성 검사
         $("input#password").blur(function () {
             var pwd = $(this).val().trim();
 
@@ -219,6 +195,7 @@
             }
         });
 
+		// 비밀번호 확인 유효성 검사
         $("input#passwordCheck").blur(function() {
             var pwd = $(this).parent().siblings().children("input#password").val();
             var pwdcheck = $(this).val().trim();
@@ -238,6 +215,7 @@
             }
         });
 
+		// 생년월일 유효성 검사
         $("input#birthday").keyup(function(){
         	$(this).val( $(this).val().replace(/[^\d]/g, "").replace(/(\d{4})(\d{2})(\d{2})/,"$1.$2.$3") );
         	
@@ -261,7 +239,7 @@
        		}
         });
 
-        
+        // 휴대폰 번호 유효성 검사
         $("input#mobile").keyup(function() { 
         	$(this).val( $(this).val().replace(/[^\d]/g, "").replace(/(\d{3})(\d{4})(\d{4})/,"$1-$2-$3"));
         	
@@ -284,15 +262,11 @@
                 });
         	}
         });
-	    
-	    
 	});// end of $(document).ready(function() {});-----------------------------
 
 	
 	function goUpdate() {
-		
 	////// 필수입력사항에 모두 입력이 됐는지 검사하기 /////
-
         var bFlagRequiredInfo = false;
 
         $(".requiredInfo").each(function () {
@@ -304,7 +278,6 @@
                 return false;
             }
         });
-        
         if (!bFlagRequiredInfo) {
         	
         	var form_data = $("form[name=registerFrm]").serialize();
@@ -316,7 +289,6 @@
         		dataType:"json",
         		success: function(json){ 
         			var n = json.n;
-        			
         			if (n == 1) {
 						alert("정보수정이 완료되었습니다.");
 						location.href="<%= ctxPath%>/mypage/myInfo.com";
@@ -331,12 +303,6 @@
                     alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
                 }
         	});
-            <%-- 
-            var frm = document.registerFrm;
-            frm.action = "<%= ctxPath%>/mypage/myInfo.com"; //자기가 자기한테 보내는중
-            frm.method = "post";
-            frm.submit(); 
-            --%>
         } 
 		
 	}// end of function goUpdate() {}-----------------------------------
@@ -375,11 +341,6 @@
 					        <input type="hidden" name="email" id="email"/>
                             <div class="error" id="emailCheck"></div>
                         </li>
-                      <!--  
-                        <li>
-                            <label class="pequenoTitle">기존비밀번호&nbsp;</label><span class="necesitado">*</span> <input type="password" name="prePassword" id="prePassword" class="myinput requiredInfo" size="41px" />
-                            <div class="error"></div>
-                        </li> -->
                         <li>
                             <label class="pequenoTitle">비밀번호&nbsp;</label><span class="necesitado">*</span> <input type="password" name="password" id="password" class="myinput requiredInfo" size="41px" />
                             <div class="error"></div>

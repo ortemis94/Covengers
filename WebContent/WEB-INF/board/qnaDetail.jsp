@@ -78,7 +78,6 @@
 			$("button#deleteQuestion").hide();
 		}
 		
-		
 		// 회원이 수정버튼을 누르면 직성되어 있는 form 그대로 update 된다. 
 		$("button#editQuestion").click(function() {
 			var questionFrm = $("form[name=questionFrm]").serialize();
@@ -119,14 +118,12 @@
 				swal("답변 내용을 입력하세요!!");
 				return;
 			}
-			
 			$.ajax({
 				url: "<%= ctxPath%>/board/registerAnswer.com",
 				data: {"answer":answer, "qnaNo":qnaNo},
 				type: "post",
 				success:function(){
 					location.reload();
-				//	swal("등록이 완료되었습니다.");
 				},
 				error: function(request, status, error){
 					alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
@@ -164,7 +161,6 @@
 				type: "post",
 				success:function(){
 					location.reload();
-				//	swal("답변이 삭제되었습니다.");
 				},
 				error: function(request, status, error){
 					alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
@@ -188,7 +184,6 @@
 			<div id="questionDiv"  class="form-group" style="border:solid 1px gray; margin-bottom:10px;"> 
 		   		<!-- 답변이 달리지 않았다면 수정가능하게 함. -->
 		        <c:if test="${qavo eq null and sessionScope.loginuser.status ne 3}">
-				<%-- <c:if test="${qavo eq null and status ne 3}"> --%>
 					<form name="questionFrm">
 						<input name="qnaNo" type="hidden" value="${qqvo.qnaNo}" />
 						<ul>
@@ -232,7 +227,6 @@
 				
 				<!-- 답변이 달렸거나 관리자가 들어올 시, 수정이나 삭제를 할 수 없음 -->
 		        <c:if test="${qavo ne null or sessionScope.loginuser.status eq 3}"> 
-				<%-- <c:if test="${qavo ne null or status eq 3}"> --%> 
 					<input name="qnaNo" type="hidden" value="${qqvo.qnaNo}" />
 					<ul>
 						<li>
@@ -247,31 +241,12 @@
 							<select id="category" name="category" class="form-control bWhite" disabled="disabled">
 								<option>${qqvo.qCategory}</option>
 							</select>
-					   <%-- <select id="category" name="category" disabled>
-								<c:forEach var="category" items="${cateList}">
-									<c:choose>
-										<c:when test="${category eq 'GOODS'}">
-											<option>상품</option>
-										</c:when>
-										<c:when test="${category eq 'DELIVERY'}">
-											<option>배송</option>
-										</c:when>
-										<c:when test="${category eq 'PAYMENT'}">
-											<option>결제</option>
-										</c:when>
-										<c:otherwise>
-											<option>기타</option>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-							</select> --%>
 						</li>
 						<li>
 							문의 내용:
 							<textarea id="content" name="content" class="form-control bWhite" cols="40" rows="8" readonly>${qqvo.qContent}</textarea>
 						</li>
 					</ul>
-					<!-- <button id="deleteQuestion" type="button" class="mybtn">삭제</button> -->
 				</c:if>
 			</div>
 	

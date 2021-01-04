@@ -62,12 +62,10 @@
 	$(document).ready(function() {
 
 		func_selectCategory();
-		
-		// 질문 유형을 고르면 func_selectCategory이 수행됨
+		// 질문 유형을 고르면 func_selectCategory이 실행됨
 		$("select#category").change(function() {
 			func_selectCategory();
 		});
-		
 		
 		// "등록" 버튼을 누르면 form을 제출함
 		$("button#submit").click(function() {
@@ -78,14 +76,12 @@
 				alert("제목을 입력하세요!!");
 				return;
 			}
-			
 			var content = $("textarea#content").val().trim();
 			
 			if (content == "") {
 				alert("문의 내용을 입력하세요!!");
 				return;
 			}
-			
 			var frm = document.questionFrm;
 			frm.action = "<%= ctxPath%>/board/qnaRegister.com";
 			frm.method = "post";
@@ -100,7 +96,6 @@
 	function func_selectCategory() {
 		
 		var category = $("select#category").val();
-		
 		if (category == '상품') {
 			category = 'GOODS';
 		}else if(category == '배송') {

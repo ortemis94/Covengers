@@ -25,7 +25,6 @@ public class MyCartAllDeleteAction extends AbstractController {
 		}else {
 			
 			String userno = loginuser.getUserno();
-		//	System.out.println("1 : "+userno);
 			
 			InterCartDAO cdao = new CartDAO();
 			int n = cdao.cartDeleteAll(userno);

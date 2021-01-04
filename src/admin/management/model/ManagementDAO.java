@@ -60,9 +60,10 @@ public class ManagementDAO implements InterManagementDAO {
 				conn = ds.getConnection();
 				
 				//////////////////////// 이번주 주간 총 판매액
-				String sql = "select to_char(sysdate, 'yyyy-ww') as weekOfYear, sum(totalprice) as totalSalesPriceByWeek\n"+
-						"    from tbl_payment \n"+
-						"    where to_char(paymentdate, 'yyyy-ww') = to_char(sysdate,'yyyy-ww')";
+				String sql = "select to_char(sysdate, 'yyyy-ww') as weekOfYear "+ 
+						"	 	   , sum(totalprice) as totalSalesPriceByWeek "+
+						"     from tbl_payment "+
+						"     where to_char(paymentdate, 'yyyy-ww') = to_char(sysdate,'yyyy-ww')";
 				
 				pstmt = conn.prepareStatement(sql);
 				
@@ -74,9 +75,10 @@ public class ManagementDAO implements InterManagementDAO {
 				}
 				
 				//////////////////////// 이번달  총 판매액 
-				sql = "select to_char(sysdate, 'yyyy-mm') as monthOfYear, sum(totalprice) as totalSalesPriceByMonth\n"+
-						"from tbl_payment\n"+
-						"where (to_char(sysdate, 'yyyy-mm') = to_char(paymentdate, 'yyyy-mm'))";
+				sql = " select to_char(sysdate, 'yyyy-mm') as monthOfYear " +
+					  "		 , sum(totalprice) as totalSalesPriceByMonth "+
+					  " from tbl_payment "+
+					  " where (to_char(sysdate, 'yyyy-mm') = to_char(paymentdate, 'yyyy-mm'))";
 				
 				pstmt = conn.prepareStatement(sql);
 				
@@ -88,10 +90,9 @@ public class ManagementDAO implements InterManagementDAO {
 				}
 				
 				//////////////////// 총 등록된 회원수
-				
-				sql = "select count(*) as totalMember\n"+
-						"from tbl_member\n"+
-						"where status = 1";
+				sql = "select count(*) as totalMember "+
+					  "from tbl_member "+
+					  "where status = 1";
 				
 				pstmt = conn.prepareStatement(sql);
 				
@@ -102,12 +103,10 @@ public class ManagementDAO implements InterManagementDAO {
 				}
 				
 				////////////////////총 등록된 상품수(옵션제외)
-				
-				sql = "select count(*) as totalProduct\n"+
-						"from tbl_product\n"+
-						"where productstatus != 0\n";
+				sql = "select count(*) as totalProduct "+
+					  "from tbl_product "+
+					  "where productstatus != 0 ";
 						
-				
 				pstmt = conn.prepareStatement(sql);
 				
 				rs = pstmt.executeQuery();
@@ -116,23 +115,19 @@ public class ManagementDAO implements InterManagementDAO {
 					managementInfo.put("totalProduct", rs.getString(1));
 				}
 				
-				
-				
 				////////////////////이번달 주문왕 (주문수)
-				
-				sql = "select fk_userno, name, purchasecount\n"+
-						"from\n"+
-						"(\n"+
-						"    select fk_userno, count(*) AS purchasecount\n"+
-						"    from tbl_payment \n"+
-						"    where (to_char(sysdate, 'yy-mm') = to_char(paymentdate, 'yy-mm'))\n"+
-						"    group by fk_userno\n"+
-						")V join tbl_member M\n"+
-						"on V.fk_userno = M.userno\n"+
-						"where M.status = 1";
+				sql = "select fk_userno, name, purchasecount "+
+					  "from "+
+					  "( "+
+					  "    select fk_userno, count(*) AS purchasecount "+
+					  "    from tbl_payment "+
+					  "    where (to_char(sysdate, 'yy-mm') = to_char(paymentdate, 'yy-mm')) "+
+					  "    group by fk_userno "+
+					  ")V join tbl_member M "+
+					  "on V.fk_userno = M.userno "+
+					  "where M.status = 1";
 				
 				pstmt = conn.prepareStatement(sql);
-				
 				rs = pstmt.executeQuery();
 				
 				if (rs.next()) {
@@ -141,23 +136,20 @@ public class ManagementDAO implements InterManagementDAO {
 					managementInfo.put("totalOrderQty", rs.getString(3));
 				}
 				
-				
 				////////////////////이번달 flex (구매액)
-				
-				sql = "select fk_userno, name, totalflex\n"+
-						"from\n"+
-						"(\n"+
-						"    select fk_userno, first_value(sum(totalprice)) over() as totalflex\n"+
-						"    from tbl_payment\n"+
-						"    where (to_char(sysdate, 'yy-mm') = to_char(paymentdate, 'yy-mm'))\n"+
-						"    group by fk_userno\n"+
-						"    order by sum(totalprice)\n"+
-						")V join tbl_member M\n"+
-						"on V.fk_userno = M.userno\n"+
-						"where status = 1";
+				sql = "select fk_userno, name, totalflex "+
+					  "from "+
+					  "( "+
+					  "    select fk_userno, first_value(sum(totalprice)) over() as totalflex "+
+					  "    from tbl_payment "+
+					  "    where (to_char(sysdate, 'yy-mm') = to_char(paymentdate, 'yy-mm')) "+
+					  "    group by fk_userno "+
+					  "    order by sum(totalprice) "+
+					  ")V join tbl_member M "+
+					  "on V.fk_userno = M.userno "+
+					  "where status = 1";
 				
 				pstmt = conn.prepareStatement(sql);
-				
 				rs = pstmt.executeQuery();
 				
 				if (rs.next()) {
@@ -167,7 +159,6 @@ public class ManagementDAO implements InterManagementDAO {
 				}
 				
 			} finally {
-			
 				close();
 			}
 		
@@ -186,6 +177,7 @@ public class ManagementDAO implements InterManagementDAO {
 		try {
 			conn = ds.getConnection();
 		
+			// 이번주 일자별 상품 판매량
 			String sql = "select to_char(sysdate, 'ww') "+
 						 "from dual";
 			
@@ -195,35 +187,28 @@ public class ManagementDAO implements InterManagementDAO {
 			rs.next();
 			
 			String sysdate = rs.getString(1); // 오늘날짜를 주차로 계산하여 sysdate에 저장.
-			
-			sql = "select payday, sum(sumOrderQty) as sumOrderQty\n"+
-					"from      \n"+
-					"(\n"+
-					"    select sum(sumorderqty) as sumOrderQty, to_char(p.paymentdate, 'ww d') as payday\n"+
-					"    from \n"+
-					"    (\n"+
-					"        select fk_paymentno, sum(orderqty) as sumorderqty\n"+
-					"        from tbl_payment_detail \n"+
-					"        group by fk_paymentno\n"+
-					"    )V join tbl_payment P\n"+
-					"    on V.fk_paymentno = P.paymentno\n"+
-					"    group by to_char(p.paymentdate, 'ww d'), sumorderqty\n"+
-					")V2\n"+
-					"group by payday\n"+ 
+			sql = "select payday, sum(sumOrderQty) as sumOrderQty "+
+					"from       "+
+					"( "+
+					"    select sum(sumorderqty) as sumOrderQty, to_char(p.paymentdate, 'ww d') as payday "+
+					"    from  "+
+					"    ( "+
+					"        select fk_paymentno, sum(orderqty) as sumorderqty "+
+					"        from tbl_payment_detail  "+
+					"        group by fk_paymentno "+
+					"    )V join tbl_payment P "+
+					"    on V.fk_paymentno = P.paymentno "+
+					"    group by to_char(p.paymentdate, 'ww d'), sumorderqty "+
+					")V2 "+
+					"group by payday "+ 
 					"order by payday asc";
 			
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
-			
 			while (rs.next()) { 
-				
 				String payday = rs.getString(1); // 상품이 팔린 날짜를 주차와 요일(숫자)로 계산하여 payday에 저장.
-			//	System.out.println( payday.substring(0, payday.indexOf(" ")) + "주");
-			//	System.out.println( payday.substring((payday.indexOf(" "))+1) + "요일");
-				
 				String payweek = payday.substring(0, payday.indexOf(" "));
-				
 				payday = payday.substring(payday.indexOf(" ")+1);
 				
 				if (payweek.equals(sysdate)) { // 상품 판매일이 오늘날짜와 같은 주차라면 판매요일과 판매량을 map에 저장 후 infoList에 추가.

@@ -41,7 +41,7 @@ public class CartDAO implements InterCartDAO {
 	}// end of private void close() {}--------------------------------------
 	
 	
-	// 회원번호로 장바구니 테이블을 조회(select)해주는 메소드
+	// 회원번호로 장바구니 테이블을 조회(select)해준다.
 	@Override
 	public List<CartVO> selectCartList(String fk_userno) throws SQLException {
 
@@ -51,7 +51,8 @@ public class CartDAO implements InterCartDAO {
 			
 			conn = ds.getConnection();
 
-			String sql = "SELECT cartno, fk_productcode, fk_optioncode, krproductname, productimg1, c.pprice, poqty\n"+
+			String sql = "SELECT cartno, fk_productcode, fk_optioncode, krproductname" +
+					     "     , productimg1, c.pprice, poqty\n"+
 						 "FROM TBL_PRODUCT P RIGHT JOIN tbl_cart c\n"+
 						 "ON p.productcode = c.fk_productcode\n"+
 						 "WHERE fk_userno = ? ";
@@ -112,12 +113,11 @@ public class CartDAO implements InterCartDAO {
 	}
 
 
-	// 장바구니 번호와 수량을 받아 물건 개수와 합계 금액을 업데이트 해주는 메소드.
+	// 장바구니 번호와 수량을 받아 물건 개수와 합계 금액을 저장(update) 해준다.
 	@Override
 	public int updateCart(int poqty, String cartno) throws SQLException {
 
 		int result = 0;
-		
 		try {
 			conn = ds.getConnection();
 			
@@ -130,13 +130,11 @@ public class CartDAO implements InterCartDAO {
 			pstmt.setInt(1, poqty); 
 			pstmt.setString(2, cartno); 
 			
-			
 			result = pstmt.executeUpdate();
 			
 		} finally {
 			close();
 		}
-		
 		return result;
 	}
 
@@ -145,29 +143,24 @@ public class CartDAO implements InterCartDAO {
 	@Override
 	public int deleteOne(String Fk_userno, String cartno) {
 	      
-	      int result = 0;
-	      
-	      try {
-	         conn = ds.getConnection();
+		int result = 0;
+		try {
+			conn = ds.getConnection();
 	         
-	         String sql = " DELETE FROM TBL_CART " + 
+			String sql = " DELETE FROM TBL_CART " + 
 	        		 	  " WHERE Fk_userno = ? AND cartno = ? ";
 	         
-	         pstmt = conn.prepareStatement(sql);
-	         
-	         pstmt.setString(1, Fk_userno);
-	         pstmt.setString(2, cartno);
-	         
-	         result = pstmt.executeUpdate();
-	         
-	      } catch( Exception e) {
-	         e.printStackTrace();
-	      } finally {
-	         close();
-	      }
-	      
-	      return result;
-		
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, Fk_userno);
+			pstmt.setString(2, cartno);
+
+			result = pstmt.executeUpdate();
+		} catch( Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return result;
 	}
 
 

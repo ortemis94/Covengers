@@ -24,8 +24,6 @@ public class EditAnswerAction extends AbstractController {
 		}else {
 			
 			String userno = loginuser.getUserno();
-		//	String userno = "0";
-			
 			String qnaNo = request.getParameter("qnaNo");
 			String answer = request.getParameter("answer");
 			
@@ -42,11 +40,7 @@ public class EditAnswerAction extends AbstractController {
 			}else {
 				System.out.println("답변 수정 실패");
 			}
-			
-		
 		}
-		
-		
 	}
 
 }
